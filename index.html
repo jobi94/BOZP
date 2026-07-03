@@ -27,24 +27,12 @@
         }
     </script>
     <style>
-        @font-face { font-family:'Poppins'; src:url('Poppins/Poppins-Thin.ttf')            format('truetype'); font-weight:100; font-style:normal; font-display:swap; }
-        @font-face { font-family:'Poppins'; src:url('Poppins/Poppins-ThinItalic.ttf')       format('truetype'); font-weight:100; font-style:italic; font-display:swap; }
-        @font-face { font-family:'Poppins'; src:url('Poppins/Poppins-ExtraLight.ttf')       format('truetype'); font-weight:200; font-style:normal; font-display:swap; }
-        @font-face { font-family:'Poppins'; src:url('Poppins/Poppins-ExtraLightItalic.ttf') format('truetype'); font-weight:200; font-style:italic; font-display:swap; }
-        @font-face { font-family:'Poppins'; src:url('Poppins/Poppins-Light.ttf')            format('truetype'); font-weight:300; font-style:normal; font-display:swap; }
-        @font-face { font-family:'Poppins'; src:url('Poppins/Poppins-LightItalic.ttf')      format('truetype'); font-weight:300; font-style:italic; font-display:swap; }
         @font-face { font-family:'Poppins'; src:url('Poppins/Poppins-Regular.ttf')          format('truetype'); font-weight:400; font-style:normal; font-display:swap; }
         @font-face { font-family:'Poppins'; src:url('Poppins/Poppins-Italic.ttf')           format('truetype'); font-weight:400; font-style:italic; font-display:swap; }
         @font-face { font-family:'Poppins'; src:url('Poppins/Poppins-Medium.ttf')           format('truetype'); font-weight:500; font-style:normal; font-display:swap; }
-        @font-face { font-family:'Poppins'; src:url('Poppins/Poppins-MediumItalic.ttf')     format('truetype'); font-weight:500; font-style:italic; font-display:swap; }
         @font-face { font-family:'Poppins'; src:url('Poppins/Poppins-SemiBold.ttf')         format('truetype'); font-weight:600; font-style:normal; font-display:swap; }
-        @font-face { font-family:'Poppins'; src:url('Poppins/Poppins-SemiBoldItalic.ttf')   format('truetype'); font-weight:600; font-style:italic; font-display:swap; }
         @font-face { font-family:'Poppins'; src:url('Poppins/Poppins-Bold.ttf')             format('truetype'); font-weight:700; font-style:normal; font-display:swap; }
         @font-face { font-family:'Poppins'; src:url('Poppins/Poppins-BoldItalic.ttf')       format('truetype'); font-weight:700; font-style:italic; font-display:swap; }
-        @font-face { font-family:'Poppins'; src:url('Poppins/Poppins-ExtraBold.ttf')        format('truetype'); font-weight:800; font-style:normal; font-display:swap; }
-        @font-face { font-family:'Poppins'; src:url('Poppins/Poppins-ExtraBoldItalic.ttf')  format('truetype'); font-weight:800; font-style:italic; font-display:swap; }
-        @font-face { font-family:'Poppins'; src:url('Poppins/Poppins-Black.ttf')            format('truetype'); font-weight:900; font-style:normal; font-display:swap; }
-        @font-face { font-family:'Poppins'; src:url('Poppins/Poppins-BlackItalic.ttf')      format('truetype'); font-weight:900; font-style:italic; font-display:swap; }
 
         *, *::before, *::after { box-sizing: border-box; }
         body { font-family: 'Poppins', sans-serif; }
@@ -145,6 +133,21 @@
             .law-divider-grid,.law-body-grid,.law-card__chevron,.law-card__chevron svg { transition:none; }
         }
 
+        /* ── FAQ accordion ── */
+        .faq-item { background:#fff; border:1px solid rgba(11,25,41,.10); transition:border-color .25s ease, box-shadow .25s ease; }
+        .faq-item.is-open { border-color:#F5A300; box-shadow:0 4px 24px rgba(245,163,0,.10); }
+        .faq-trigger { display:flex; align-items:center; justify-content:space-between; gap:16px; width:100%; padding:24px; background:transparent; border:none; cursor:pointer; text-align:left; font-family:'Poppins',sans-serif; font-size:1.125rem; font-weight:700; color:#0B1929; }
+        .faq-trigger:focus-visible { outline:2px solid #F5A300; outline-offset:2px; }
+        .faq-icon { width:20px; height:20px; color:#F5A300; flex-shrink:0; transition:transform .35s cubic-bezier(.4,0,.2,1); }
+        .faq-item.is-open .faq-icon { transform:rotate(45deg); }
+        .faq-body-grid { display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s cubic-bezier(.4,0,.2,1); }
+        .faq-item.is-open .faq-body-grid { grid-template-rows:1fr; }
+        .faq-body-grid > div { overflow:hidden; }
+        .faq-body { padding:0 24px 24px; font-size:.875rem; line-height:1.85; color:#6b7280; }
+        @media (prefers-reduced-motion:reduce) {
+            .faq-body-grid, .faq-icon { transition:none; }
+        }
+
         /* ── Form focus ── */
         input:focus, select:focus, textarea:focus {
             outline: none;
@@ -178,7 +181,7 @@
 
         <!-- Logo -->
         <a href="#" class="flex items-center group">
-            <img src="img./logo-full.png" alt="Správa BOZP s.r.o." class="h-9 w-auto">
+            <img src="img./logo-full.avif" alt="Správa BOZP s.r.o." class="h-9 w-auto">
         </a>
 
         <!-- Desktop links -->
@@ -292,7 +295,7 @@
 ════════════════════════════════════════ -->
 <section id="domu" class="hero-bg relative min-h-screen flex items-center overflow-hidden">
     <!-- Background photo -->
-    <img src="img./les - wallpaper.svg" alt="" class="absolute inset-0 w-full h-full object-cover">
+    <img src="img./hero.avif" alt="" class="absolute inset-0 w-full h-full object-cover">
     <!-- Dark overlay for legibility -->
     <div class="absolute inset-0" style="background:linear-gradient(115deg, rgba(11,25,41,.75) 0%, rgba(11,25,41,.60) 38%, rgba(11,25,41,.30) 70%, rgba(11,25,41,.15) 100%)"></div>
     <!-- Mobile-only eyebrow pinned near navbar -->
@@ -505,7 +508,7 @@
                          style="background-image:linear-gradient(rgba(245,163,0,1) 1px,transparent 1px),linear-gradient(90deg,rgba(245,163,0,1) 1px,transparent 1px);background-size:36px 36px">
                     </div>
                     <!-- Lion head -->
-                    <img src="img./lion-logo.png" alt="Lev" class="relative z-10 w-4/5 max-w-xs select-none" style="filter:brightness(0) invert(1); opacity:0.92">
+                    <img src="img./lion-logo.avif" alt="Lev" class="relative z-10 w-4/5 max-w-xs select-none" style="filter:brightness(0) invert(1); opacity:0.92">
                 </div>
                 <!-- Gold badge -->
                 <div class="absolute -bottom-5 -right-5 lg:-right-8 bg-gold p-6 shadow-2xl">
@@ -550,11 +553,11 @@
 
     <!-- Background slideshow -->
     <div class="absolute inset-0 z-0">
-        <div class="bg-slide absolute inset-0 bg-cover bg-center" style="background-image:url('img./IMG_background/Czech Office_ A calm empty modern open-plan office in a renovated Czech building, early morning soft daylight from large windows, tidy desks with closed laptops, plants, a clean corridor with a small green evacuation sign above a door in so.jpg'); transition:opacity 1.2s ease-in-out; opacity:1"></div>
-        <div class="bg-slide absolute inset-0 bg-cover bg-center" style="background-image:url('img./IMG_background/Manufacturing_ Interior of a clean empty mid-sized Czech production hall, CNC machines at rest, warm industrial lighting mixed with daylight from skylights, clearly marked yellow floor lines, organized workbenches, everything calm and order.jpg'); transition:opacity 1.2s ease-in-out; opacity:0"></div>
-        <div class="bg-slide absolute inset-0 bg-cover bg-center" style="background-image:url('img./IMG_background/Gastro_ An empty professional restaurant kitchen before opening, polished stainless steel surfaces reflecting soft light, neatly arranged pots and utensils, a small red fire extinguisher mounted on the wall in soft background blur, faint st.jpg'); transition:opacity 1.2s ease-in-out; opacity:0"></div>
+        <div class="bg-slide absolute inset-0 bg-cover bg-center" style="background-image:url('img./IMG_background/office.avif'); transition:opacity 1.2s ease-in-out; opacity:1"></div>
+        <div class="bg-slide absolute inset-0 bg-cover bg-center" style="background-image:url('img./IMG_background/manufacturing.avif'); transition:opacity 1.2s ease-in-out; opacity:0"></div>
+        <div class="bg-slide absolute inset-0 bg-cover bg-center" style="background-image:url('img./IMG_background/gastro.avif'); transition:opacity 1.2s ease-in-out; opacity:0"></div>
         <div class="bg-slide absolute inset-0 bg-cover bg-center" style="background-image:url('img./IMG_background/School_ A bright empty Czech elementary school corridor with high ceilings and large old windows, children\'s drawings on the walls, morning sunlight falling across the floor, green emergency exit sign softly visible above glass doors. Very .jpg'); transition:opacity 1.2s ease-in-out; opacity:0"></div>
-        <div class="bg-slide absolute inset-0 bg-cover bg-center" style="background-image:url('img./IMG_background/Municipality_ A quiet small Czech town square at early morning with some parked czech cars, historic municipal building, cobblestones, red-tiled roofs, soft morning light, a hydrant cover on the pavement in the foreground, empty streets. Sl.jpg'); transition:opacity 1.2s ease-in-out; opacity:0"></div>
+        <div class="bg-slide absolute inset-0 bg-cover bg-center" style="background-image:url('img./IMG_background/municipality.avif'); transition:opacity 1.2s ease-in-out; opacity:0"></div>
     </div>
 
     <!-- Dark overlay -->
@@ -602,35 +605,43 @@
         </div>
 
         <div class="space-y-4">
-            <details class="reveal group bg-white border border-navy/10 open:border-gold transition">
-                <summary class="flex items-center justify-between gap-4 cursor-pointer list-none p-6 font-serif text-lg font-bold text-navy">
+
+            <div class="faq-item reveal">
+                <button class="faq-trigger" aria-expanded="false">
                     Musím mít externí BOZP, nebo to zvládnu sám?
-                    <svg class="w-5 h-5 text-gold flex-shrink-0 transition group-open:rotate-45" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
-                </summary>
-                <p class="px-6 pb-6 text-gray-500 text-sm leading-relaxed">
-                    Pokud má firma více než 25 zaměstnanců, zákon vyžaduje, aby úkoly v prevenci rizik zajišťovala odborně způsobilá osoba — buď interní zaměstnanec, nebo externí specialista. U menších firem to sice zákon přímo nenařizuje, ale odpovědnost zůstává stejná, a chyba v dokumentaci nebo proškolení může znamenat vysokou pokutu.
-                </p>
-            </details>
+                    <svg class="faq-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+                </button>
+                <div class="faq-body-grid">
+                    <div>
+                        <p class="faq-body">Pokud má firma více než 25 zaměstnanců, zákon vyžaduje, aby úkoly v prevenci rizik zajišťovala odborně způsobilá osoba — buď interní zaměstnanec, nebo externí specialista. U menších firem to sice zákon přímo nenařizuje, ale odpovědnost zůstává stejná, a chyba v dokumentaci nebo proškolení může znamenat vysokou pokutu.</p>
+                    </div>
+                </div>
+            </div>
 
-            <details class="reveal group bg-white border border-navy/10 open:border-gold transition">
-                <summary class="flex items-center justify-between gap-4 cursor-pointer list-none p-6 font-serif text-lg font-bold text-navy">
+            <div class="faq-item reveal">
+                <button class="faq-trigger" aria-expanded="false">
                     Co všechno zahrnuje outsourcing BOZP a PO?
-                    <svg class="w-5 h-5 text-gold flex-shrink-0 transition group-open:rotate-45" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
-                </summary>
-                <p class="px-6 pb-6 text-gray-500 text-sm leading-relaxed">
-                    Záleží na rozsahu, který si nastavíme. Obvykle jde o zpracování a aktualizaci dokumentace, školení zaměstnanců, pravidelné prověrky a revize, vedení evidence úrazů a zastupování při kontrolách státního dozoru.
-                </p>
-            </details>
+                    <svg class="faq-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+                </button>
+                <div class="faq-body-grid">
+                    <div>
+                        <p class="faq-body">Záleží na rozsahu, který si nastavíme. Obvykle jde o zpracování a aktualizaci dokumentace, školení zaměstnanců, pravidelné prověrky a revize, vedení evidence úrazů a zastupování při kontrolách státního dozoru.</p>
+                    </div>
+                </div>
+            </div>
 
-            <details class="reveal group bg-white border border-navy/10 open:border-gold transition">
-                <summary class="flex items-center justify-between gap-4 cursor-pointer list-none p-6 font-serif text-lg font-bold text-navy">
+            <div class="faq-item reveal">
+                <button class="faq-trigger" aria-expanded="false">
                     Jak dlouho trvá zavedení systému BOZP ve firmě?
-                    <svg class="w-5 h-5 text-gold flex-shrink-0 transition group-open:rotate-45" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
-                </summary>
-                <p class="px-6 pb-6 text-gray-500 text-sm leading-relaxed">
-                    Po vstupním auditu obvykle netrvá nastavení základní dokumentace a školení déle než několik týdnů. Konkrétní termín se odvíjí od velikosti firmy a aktuálního stavu vaší agendy.
-                </p>
-            </details>
+                    <svg class="faq-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+                </button>
+                <div class="faq-body-grid">
+                    <div>
+                        <p class="faq-body">Po vstupním auditu obvykle netrvá nastavení základní dokumentace a školení déle než několik týdnů. Konkrétní termín se odvíjí od velikosti firmy a aktuálního stavu vaší agendy.</p>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </section>
@@ -843,6 +854,26 @@
         function toggle(){ var o = c.getAttribute('aria-expanded')==='true'; c.setAttribute('aria-expanded', String(!o)); }
         c.addEventListener('click', toggle);
         c.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); toggle(); } });
+    })();
+
+    // ── FAQ accordion ──
+    (function(){
+        document.querySelectorAll('.faq-trigger').forEach(function(btn){
+            btn.addEventListener('click', function(){
+                var item = btn.closest('.faq-item');
+                var isOpen = item.classList.contains('is-open');
+                // Close all
+                document.querySelectorAll('.faq-item').forEach(function(i){
+                    i.classList.remove('is-open');
+                    i.querySelector('.faq-trigger').setAttribute('aria-expanded','false');
+                });
+                // Toggle open
+                if(!isOpen){
+                    item.classList.add('is-open');
+                    btn.setAttribute('aria-expanded','true');
+                }
+            });
+        });
     })();
 </script>
 
