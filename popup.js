@@ -6,8 +6,6 @@
 (function () {
   'use strict';
 
-  var STORAGE_KEY       = 'bozp_popup_dismissed';
-  var DISMISS_DAYS      = 7;
   var DELAY_DESKTOP     = 30000;   // 30 s
   var DELAY_MOBILE      = 30000;   // 30 s
   var SCROLL_THRESHOLD  = 0.50;    // 50 % stránky
@@ -66,7 +64,7 @@
     var style = document.createElement('style');
     style.textContent = [
       '@keyframes bozpFadeIn{from{opacity:0}to{opacity:1}}',
-      '@keyframes bozpSlideUp{from{opacity:0;transform:translate(-50%,-46%)}to{opacity:1;transform:translate(-50%,-50%)}}',
+      '@keyframes bozpSlideUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}',
 
       '#bozp-overlay{',
         'position:fixed;inset:0;z-index:99999;',
