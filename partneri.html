@@ -66,7 +66,7 @@
 <!-- ════════════════════════════════════════
      NAVIGATION
 ════════════════════════════════════════ -->
-<nav id="navbar" class="fixed top-0 inset-x-0 z-50 scrolled">
+<nav id="navbar" class="fixed top-0 inset-x-0 z-50">
     <div class="relative py-5 px-6 lg:px-12">
     <div class="nav-bg-white"></div>
     <div class="nav-bg-accent"></div>
@@ -112,7 +112,7 @@
                 </span>
                 <div class="absolute left-1/2 -translate-x-1/2 top-full pt-3 opacity-0 invisible translate-y-1 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-200 z-20">
                     <div class="bg-white shadow-lg border border-gray-100 py-2 min-w-[160px]">
-                        <a href="index.html#o-nas"   class="block px-5 py-2.5 text-navy/70 hover:text-navy hover:bg-gray-50 text-xs tracking-[0.1em] uppercase transition">O nás</a>
+                        <a href="o-nas.html"   class="block px-5 py-2.5 text-navy/70 hover:text-navy hover:bg-gray-50 text-xs tracking-[0.1em] uppercase transition">O nás</a>
                         <a href="index.html#kontakt" class="block px-5 py-2.5 text-navy/70 hover:text-navy hover:bg-gray-50 text-xs tracking-[0.1em] uppercase transition">Kontakt</a>
                     </div>
                 </div>
@@ -173,7 +173,7 @@
                     <svg id="mob-spolecnost-icon" class="w-3.5 h-3.5 transition-transform duration-200 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
                 </button>
                 <div id="mob-spolecnost" class="overflow-hidden" style="max-height:0;transition:max-height .3s ease">
-                    <a href="index.html#o-nas"   class="block text-white/70 hover:text-white py-2 pl-4 text-sm transition">O nás</a>
+                    <a href="o-nas.html"   class="block text-white/70 hover:text-white py-2 pl-4 text-sm transition">O nás</a>
                     <a href="index.html#kontakt" class="block text-white/70 hover:text-white py-2 pl-4 text-sm transition">Kontakt</a>
                     <div class="pb-2"></div>
                 </div>
@@ -282,7 +282,7 @@
             <div>
                 <h4 class="text-navy text-[10px] font-bold uppercase tracking-[0.25em] mb-6">Společnost</h4>
                 <ul class="space-y-3">
-                    <li><a href="index.html#o-nas"  class="text-navy/70 text-sm hover:text-navy transition">O nás</a></li>
+                    <li><a href="o-nas.html"  class="text-navy/70 text-sm hover:text-navy transition">O nás</a></li>
                     <li><a href="partneri.html"     class="text-navy/70 text-sm hover:text-navy transition">Partneři</a></li>
                     <li><a href="index.html#kontakt" class="text-navy/70 text-sm hover:text-navy transition">Kontakt</a></li>
                     <li><a href="#"                 class="text-navy/70 text-sm hover:text-navy transition">Ochrana osobních údajů</a></li>
@@ -322,6 +322,7 @@
         nav.classList.toggle('scrolled', window.scrollY > 60 || mobMenu.classList.contains('open'));
     }
     window.addEventListener('scroll', updateNavState, { passive: true });
+    updateNavState();
 
     // ── Mobile menu ──
     const ham = document.getElementById('ham');
@@ -378,5 +379,6 @@
     });
 </script>
 
+<script src="popup.js" defer></script>
 </body>
 </html>

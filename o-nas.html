@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O nás | Správa BOZP s.r.o. – tým odborníků na BOZP a PO</title>
+    <meta name="description" content="Jsme tým odborně způsobilých specialistů na BOZP, požární ochranu a životní prostředí. Sídlíme v Jaroměři, kancelář máme v Hradci Králové. Pracujeme po celé ČR.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy:    '#0B1929',
+                        'navy-l':'#152438',
+                        gold:    '#F5A300',
+                        'gold-l':'#F7B733',
+                        cream:   '#F7F4EE',
+                        crimson: '#E63939',
+                        green:   '#2A7A3C',
+                    },
+                    fontFamily: {
+                        serif: ['Poppins', 'system-ui', 'sans-serif'],
+                        sans:  ['Poppins', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        @font-face { font-family:'Poppins'; src:url('Poppins/Poppins-Regular.ttf')    format('truetype'); font-weight:400; font-style:normal;  font-display:swap; }
+        @font-face { font-family:'Poppins'; src:url('Poppins/Poppins-Italic.ttf')     format('truetype'); font-weight:400; font-style:italic;  font-display:swap; }
+        @font-face { font-family:'Poppins'; src:url('Poppins/Poppins-Medium.ttf')     format('truetype'); font-weight:500; font-style:normal;  font-display:swap; }
+        @font-face { font-family:'Poppins'; src:url('Poppins/Poppins-SemiBold.ttf')   format('truetype'); font-weight:600; font-style:normal;  font-display:swap; }
+        @font-face { font-family:'Poppins'; src:url('Poppins/Poppins-Bold.ttf')       format('truetype'); font-weight:700; font-style:normal;  font-display:swap; }
+        @font-face { font-family:'Poppins'; src:url('Poppins/Poppins-BoldItalic.ttf') format('truetype'); font-weight:700; font-style:italic;  font-display:swap; }
+
+        *, *::before, *::after { box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; }
+        h1,h2,h3,h4 { font-family: 'Poppins', sans-serif; }
+
+        /* ── Navbar ── */
+        #navbar { transition: padding 0.3s, box-shadow 0.3s; }
+        #navbar.scrolled { box-shadow: 0 2px 24px rgba(0,0,0,.12); }
+        .nav-bg-white  { position:absolute; inset:0; background:#fff; clip-path: polygon(0 0,71% 0,65% 100%,0 100%); z-index:0; }
+        .nav-bg-accent { position:absolute; inset:0; background:transparent; clip-path: polygon(71% 0,100% 0,100% 100%,65% 100%); z-index:0; pointer-events:none; transition: background .3s; }
+        #navbar.scrolled .nav-bg-accent { background: #657eb4; }
+
+        /* ── Scroll fade-in ── */
+        .reveal { opacity:0; transform:translateY(28px); transition: opacity .7s ease, transform .7s ease; }
+        .reveal.visible { opacity:1; transform:none; }
+
+        /* ── Mobile menu ── */
+        #mob-menu { position:absolute; top:100%; right:0; width:50%; min-width:260px; max-height:0; overflow:hidden; transition:max-height .35s ease; }
+        #mob-menu.open { max-height:600px; }
+
+        /* ── Hamburger ── */
+        .ham-line { display:block; width:22px; height:2px; background:currentColor; border-radius:2px; transition:transform .3s ease, opacity .3s ease; }
+        #ham.open .ham-line:nth-child(1) { transform:translateY(8px) rotate(45deg); }
+        #ham.open .ham-line:nth-child(2) { opacity:0; transform:scaleX(0); }
+        #ham.open .ham-line:nth-child(3) { transform:translateY(-8px) rotate(-45deg); }
+
+        /* ── Inline links ── */
+        .text-link     { color:#0B1929; font-weight:600; border-bottom:2px solid #F5A300; padding-bottom:1px; text-decoration:none; transition:color .2s; }
+        .text-link:hover { color:#F5A300; }
+        .text-link-ext { color:#0B1929; font-weight:600; border-bottom:2px dashed rgba(245,163,0,.6); padding-bottom:1px; text-decoration:none; transition:color .2s, border-color .2s; }
+        .text-link-ext:hover { color:#F5A300; border-bottom-color:#F5A300; }
+
+        /* ── Differentiator cards ── */
+        .diff-card { border-left:3px solid rgba(11,25,41,.08); padding:28px 28px 28px 28px; transition:border-left-color .2s, background .2s; }
+        .diff-card:hover { border-left-color:#F5A300; background:#fff; }
+
+        /* ── Process steps ── */
+        .step-num { width:56px; height:56px; border-radius:50%; background:#0B1929; color:#F5A300; font-weight:700; font-size:1.125rem; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+        .step-connector { flex:1; height:2px; background:rgba(245,163,0,.25); margin:0 8px; }
+
+        /* ── Partner card ── */
+        .partner-card { border:2px solid rgba(11,25,41,.08); padding:36px; transition:border-color .25s, box-shadow .25s; }
+        .partner-card:hover { border-color:rgba(245,163,0,.35); box-shadow:0 8px 32px rgba(245,163,0,.1); }
+    </style>
+</head>
+<body class="bg-white text-gray-800 antialiased">
+
+
+<!-- ════════════════════════════════════════
+     NAVIGATION
+════════════════════════════════════════ -->
+<nav id="navbar" class="fixed top-0 inset-x-0 z-50">
+    <div class="relative py-5 px-6 lg:px-12">
+    <div class="nav-bg-white"></div>
+    <div class="nav-bg-accent"></div>
+    <div class="relative z-10 max-w-7xl mx-auto flex items-center justify-between">
+
+        <a href="index.html" class="flex items-center group">
+            <img src="img./logo-full.avif" alt="Správa BOZP s.r.o." class="h-9 w-auto">
+        </a>
+
+        <div class="hidden lg:flex items-center gap-10">
+            <a href="index.html#domu" class="text-navy/70 hover:text-navy text-xs tracking-[0.15em] uppercase transition">Domů</a>
+
+            <div class="relative group">
+                <span class="flex items-center gap-1 cursor-pointer text-navy/70 group-hover:text-navy text-xs tracking-[0.15em] uppercase transition">
+                    Služby
+                    <svg class="w-3 h-3 transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                </span>
+                <div class="absolute left-1/2 -translate-x-1/2 top-full pt-3 opacity-0 invisible translate-y-1 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-200 z-20">
+                    <div class="bg-white shadow-lg border border-gray-100 py-2 min-w-[220px]">
+                        <a href="bozp.html"                  class="block px-5 py-2.5 text-navy/70 hover:text-navy hover:bg-gray-50 text-xs tracking-[0.1em] uppercase transition whitespace-nowrap">BOZP</a>
+                        <a href="pozarni-ochrana.html"       class="block px-5 py-2.5 text-navy/70 hover:text-navy hover:bg-gray-50 text-xs tracking-[0.1em] uppercase transition whitespace-nowrap">Požární ochrana</a>
+                        <a href="zivotni-prostredi-ems.html" class="block px-5 py-2.5 text-navy/70 hover:text-navy hover:bg-gray-50 text-xs tracking-[0.1em] uppercase transition whitespace-nowrap">Životní prostředí - EMS</a>
+                        <a href="obce.html"                  class="block px-5 py-2.5 text-navy/70 hover:text-navy hover:bg-gray-50 text-xs tracking-[0.1em] uppercase transition whitespace-nowrap">Obce</a>
+                        <a href="slovnicek-pojmu.html"       class="block px-5 py-2.5 text-navy/70 hover:text-navy hover:bg-gray-50 text-xs tracking-[0.1em] uppercase transition whitespace-nowrap">Slovníček pojmů</a>
+                    </div>
+                </div>
+            </div>
+
+            <a href="partneri.html" class="text-navy/70 hover:text-navy text-xs tracking-[0.15em] uppercase transition">Partneři</a>
+
+            <div class="relative group">
+                <span class="flex items-center gap-1 cursor-pointer text-navy group-hover:text-navy text-xs tracking-[0.15em] uppercase transition font-semibold">
+                    Společnost
+                    <svg class="w-3 h-3 transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                </span>
+                <div class="absolute left-1/2 -translate-x-1/2 top-full pt-3 opacity-0 invisible translate-y-1 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-200 z-20">
+                    <div class="bg-white shadow-lg border border-gray-100 py-2 min-w-[160px]">
+                        <a href="o-nas.html"        class="block px-5 py-2.5 text-navy font-semibold hover:bg-gray-50 text-xs tracking-[0.1em] uppercase transition">O nás</a>
+                        <a href="index.html#kontakt" class="block px-5 py-2.5 text-navy/70 hover:text-navy hover:bg-gray-50 text-xs tracking-[0.1em] uppercase transition">Kontakt</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <a href="index.html#kontakt" class="hidden lg:inline-block bg-gold hover:bg-gold-l text-white text-xs px-6 py-3 tracking-[0.2em] uppercase transition font-medium">
+            Kontaktujte nás
+        </a>
+
+        <div class="lg:hidden flex items-center gap-2">
+            <a href="mailto:asistentka@spravaBOZP.cz" class="flex items-center justify-center w-9 h-9 rounded-full bg-gold flex-shrink-0" aria-label="E-mail">
+                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            </a>
+            <button id="ham" class="text-navy p-2 flex flex-col gap-1.5" aria-label="Menu">
+                <span class="ham-line"></span>
+                <span class="ham-line"></span>
+                <span class="ham-line"></span>
+            </button>
+        </div>
+    </div>
+    </div>
+
+    <div id="mob-menu" class="lg:hidden overflow-hidden">
+        <div class="w-full shadow-xl px-6 py-2" style="background:#657eb4;border-top:1px solid rgba(255,255,255,.15)">
+            <a href="index.html#domu" class="flex items-center text-white/80 hover:text-white py-3 text-sm font-medium transition border-b border-white/10">Domů</a>
+            <div class="border-b border-white/10">
+                <button id="mob-sluzby-btn" class="flex items-center justify-between w-full text-white/80 hover:text-white py-3 text-sm font-medium transition">
+                    <span>Služby</span><svg id="mob-sluzby-icon" class="w-3.5 h-3.5 transition-transform duration-200 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                </button>
+                <div id="mob-sluzby" class="overflow-hidden" style="max-height:0;transition:max-height .3s ease">
+                    <a href="bozp.html"                  class="block text-white/70 hover:text-white py-2 pl-4 text-sm transition">BOZP</a>
+                    <a href="pozarni-ochrana.html"       class="block text-white/70 hover:text-white py-2 pl-4 text-sm transition">Požární ochrana</a>
+                    <a href="zivotni-prostredi-ems.html" class="block text-white/70 hover:text-white py-2 pl-4 text-sm transition">Životní prostředí - EMS</a>
+                    <a href="obce.html"                  class="block text-white/70 hover:text-white py-2 pl-4 text-sm transition">Obce</a>
+                    <a href="slovnicek-pojmu.html"       class="block text-white/70 hover:text-white py-2 pl-4 text-sm transition">Slovníček pojmů</a>
+                    <div class="pb-2"></div>
+                </div>
+            </div>
+            <a href="partneri.html" class="flex items-center text-white/80 hover:text-white py-3 text-sm font-medium transition border-b border-white/10">Partneři</a>
+            <div class="border-b border-white/10">
+                <button id="mob-spolecnost-btn" class="flex items-center justify-between w-full text-white py-3 text-sm font-semibold transition">
+                    <span>Společnost</span><svg id="mob-spolecnost-icon" class="w-3.5 h-3.5 transition-transform duration-200 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                </button>
+                <div id="mob-spolecnost" class="overflow-hidden" style="max-height:0;transition:max-height .3s ease">
+                    <a href="o-nas.html"        class="block text-white font-semibold py-2 pl-4 text-sm transition">O nás</a>
+                    <a href="index.html#kontakt" class="block text-white/70 hover:text-white py-2 pl-4 text-sm transition">Kontakt</a>
+                    <div class="pb-2"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+<!-- ════════════════════════════════════════
+     HERO
+════════════════════════════════════════ -->
+<section class="relative overflow-hidden" style="background:#0B1929">
+    <div class="absolute inset-0 opacity-[0.05]" style="background-image:linear-gradient(rgba(245,163,0,1) 1px,transparent 1px),linear-gradient(90deg,rgba(245,163,0,1) 1px,transparent 1px);background-size:48px 48px"></div>
+    <div class="absolute top-1/4 right-8 lg:right-24 w-64 lg:w-96 h-64 lg:h-96 border border-gold/10 rotate-45 pointer-events-none z-[1]"></div>
+    <div class="absolute top-1/3 right-16 lg:right-36 w-40 lg:w-60 h-40 lg:h-60 border border-gold/8 rotate-45 pointer-events-none z-[1]"></div>
+    <div class="absolute left-0 top-0 w-1 h-full bg-gradient-to-b from-transparent via-gold to-transparent opacity-40"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 pt-44 pb-16 lg:py-44 w-full grid lg:grid-cols-2 gap-16 items-center">
+
+        <div class="reveal visible" style="transition-delay:0s">
+            <p class="text-gold text-xs tracking-[0.35em] uppercase mb-5">Kdo jsme · Správa BOZP</p>
+            <h1 class="font-serif text-4xl lg:text-5xl xl:text-[3.25rem] font-bold text-white leading-[1.15] mb-8">
+                Jsme Správa BOZP.<br>
+                <span class="text-gold">Lidé, kteří bezpečnosti<br>práce rozumí</span> – a baví je to.
+            </h1>
+            <p class="text-white/70 text-base lg:text-lg leading-relaxed mb-5">
+                Vznikli jsme z jednoduché myšlenky: že <a href="bozp.html" class="text-link" style="color:#F5A300;border-bottom-color:rgba(255,255,255,.3)">bezpečnost práce</a> a <a href="pozarni-ochrana.html" class="text-link" style="color:#F5A300;border-bottom-color:rgba(255,255,255,.3)">požární ochrana</a> nemusí být strašák, který firmy řeší narychlo před kontrolou. Může to být funkční systém, který chrání lidi, šetří nervy a při kontrole prostě obstojí.
+            </p>
+            <p class="text-white/60 text-sm leading-relaxed mb-10">
+                Za každou zakázkou stojí konkrétní člověk z týmu — ten, kdo přijde na váš audit, zpracuje dokumentaci a zastoupí vaši firmu při kontrole inspektorátu.
+            </p>
+            <a href="#ozvete-se" class="inline-flex items-center gap-3 bg-gold hover:bg-gold-l text-white text-xs px-7 py-3.5 tracking-[0.2em] uppercase transition font-semibold">
+                Ozvěte se
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+            </a>
+        </div>
+
+        <div class="hidden lg:block reveal visible" style="transition-delay:.15s">
+            <div class="ml-auto max-w-sm border border-white/20 p-10 backdrop-blur-md" style="background:rgba(255,255,255,.18)">
+                <p class="text-gold text-[10px] tracking-[0.3em] uppercase mb-8">Správa BOZP v číslech</p>
+                <div class="space-y-7">
+                    <div class="flex items-center gap-5">
+                        <div class="text-4xl font-bold text-white leading-none">9</div>
+                        <div>
+                            <div class="text-white text-sm font-semibold">specialistů v týmu</div>
+                            <div class="text-white/60 text-xs mt-0.5">OZO, technici PO, specialisté EMS</div>
+                        </div>
+                    </div>
+                    <div class="border-t border-white/15"></div>
+                    <div class="flex items-center gap-5">
+                        <div class="text-4xl font-bold text-white leading-none">3</div>
+                        <div>
+                            <div class="text-white text-sm font-semibold">oblasti odbornosti</div>
+                            <div class="text-white/60 text-xs mt-0.5">BOZP · Požární ochrana · EMS</div>
+                        </div>
+                    </div>
+                    <div class="border-t border-white/15"></div>
+                    <div class="flex items-center gap-5">
+                        <div class="text-white/90 text-sm leading-relaxed font-medium italic">"Ne šablona z internetu. Skutečný systém připravený na míru."</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- ════════════════════════════════════════
+     CO NÁS ODLIŠUJE
+════════════════════════════════════════ -->
+<section class="bg-cream py-24 px-6">
+    <div class="max-w-6xl mx-auto">
+
+        <div class="max-w-2xl mb-16 reveal">
+            <p class="text-gold text-xs tracking-[0.35em] uppercase mb-4">Proč my</p>
+            <h2 class="font-serif text-3xl lg:text-4xl font-bold text-navy leading-tight mb-5">Co nás odlišuje od jiných firem v oboru</h2>
+            <p class="text-gray-600 text-base leading-relaxed">V oblasti BOZP a PO existuje spousta firem. Většina z nich nabízí na papíře totéž. Proto je důležité vědět, co konkrétně dostanete u nás.</p>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-4">
+
+            <div class="diff-card bg-cream reveal">
+                <div class="flex items-start gap-5">
+                    <div class="w-12 h-12 bg-navy/8 flex items-center justify-center flex-shrink-0">
+                        <svg class="w-6 h-6 text-navy" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                    </div>
+                    <div>
+                        <h3 class="text-navy font-bold text-base mb-2">Tým odborně způsobilých osob, ne jeden člověk</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">Náš tým tvoří specialisté na BOZP, požární ochranu i životní prostředí. Máte přístup ke komplexní odbornosti — nemusíte hledat tři různé dodavatele.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="diff-card bg-cream reveal" style="transition-delay:.05s">
+                <div class="flex items-start gap-5">
+                    <div class="w-12 h-12 bg-navy/8 flex items-center justify-center flex-shrink-0">
+                        <svg class="w-6 h-6 text-navy" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                    </div>
+                    <div>
+                        <h3 class="text-navy font-bold text-base mb-2">Elektronický informační systém</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">Veškerou agendu vedeme v CRM systému. Sledujeme termíny revizí, školení a aktualizací. Přes klientský přístup vidíte stav vaší BOZP kdykoli — bez telefonování a dohledávání papírů.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="diff-card bg-cream reveal" style="transition-delay:.1s">
+                <div class="flex items-start gap-5">
+                    <div class="w-12 h-12 bg-navy/8 flex items-center justify-center flex-shrink-0">
+                        <svg class="w-6 h-6 text-navy" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    </div>
+                    <div>
+                        <h3 class="text-navy font-bold text-base mb-2">Pohotovost mimo pracovní dobu</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">Havárie, nečekaná kontrola nebo pracovní úraz se nestávají podle rozvrhu. Jsme dostupní i mimo standardní pracovní dobu — v případě nouze se máte na koho obrátit.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="diff-card bg-cream reveal" style="transition-delay:.15s">
+                <div class="flex items-start gap-5">
+                    <div class="w-12 h-12 bg-navy/8 flex items-center justify-center flex-shrink-0">
+                        <svg class="w-6 h-6 text-navy" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"/></svg>
+                    </div>
+                    <div>
+                        <h3 class="text-navy font-bold text-base mb-2">Zastoupení při kontrolách</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">Když přijde oblastní inspektorát práce, hasičský záchranný sbor nebo Česká inspekce životního prostředí, nejste na to sami. Přijdeme s vámi a obhájíme odvedenou práci.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="diff-card bg-cream lg:col-span-2 reveal" style="transition-delay:.2s">
+                <div class="flex items-start gap-5">
+                    <div class="w-12 h-12 bg-gold/15 flex items-center justify-center flex-shrink-0">
+                        <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/></svg>
+                    </div>
+                    <div>
+                        <h3 class="text-navy font-bold text-base mb-2">Žádný projekt není příliš malý ani příliš velký</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">Pracujeme s drobnými živnostníky se dvěma zaměstnanci i s výrobními podniky s desítkami provozů. Přístup přizpůsobujeme vždy konkrétní situaci — ne naopak.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- ════════════════════════════════════════
+     NÁŠ TÝM
+════════════════════════════════════════ -->
+<section class="bg-white py-24 px-6">
+    <div class="max-w-6xl mx-auto">
+        <div class="grid lg:grid-cols-2 gap-16 items-center">
+
+            <div class="reveal">
+                <p class="text-gold text-xs tracking-[0.35em] uppercase mb-4">Lidé za firmou</p>
+                <h2 class="font-serif text-3xl lg:text-4xl font-bold text-navy leading-tight mb-7">Náš tým</h2>
+                <p class="text-gray-700 text-base leading-relaxed mb-5">
+                    Tým Správy BOZP tvoří devět specialistů — odborně způsobilé osoby v prevenci rizik, technici požární ochrany a specialisté na <a href="zivotni-prostredi-ems.html" class="text-link">životní prostředí</a>. Každý z nich má za sebou zkoušky před státní komisí, praxi v terénu a přehled o aktuální legislativě.
+                </p>
+                <p class="text-gray-700 text-base leading-relaxed mb-5">
+                    Nejsme konzultanti, kteří vám pošlou šablonu e-mailem. Chodíme fyzicky na pracoviště, mluvíme se zaměstnanci, vidíme provoz na vlastní oči. Jen tak lze nastavit dokumentaci, která odpovídá realitě — a při kontrole obstojí.
+                </p>
+                <p class="text-gray-600 text-base leading-relaxed">
+                    Pokud máte zájem poznat konkrétní lidi z týmu, kteří by se starali o vaši firmu, napište nebo zavolejte. Rádi vám představíme, kdo by s vámi spolupracoval.
+                </p>
+            </div>
+
+            <div class="reveal" style="transition-delay:.12s">
+                <div class="grid grid-cols-3 gap-3">
+                    <div class="bg-cream aspect-square flex flex-col items-center justify-center p-4 text-center">
+                        <div class="text-3xl font-bold text-navy mb-1">9</div>
+                        <div class="text-navy/60 text-xs leading-tight">specialistů<br>v týmu</div>
+                    </div>
+                    <div class="bg-navy aspect-square flex flex-col items-center justify-center p-4 text-center">
+                        <div class="text-3xl font-bold text-gold mb-1">OZO</div>
+                        <div class="text-white/60 text-xs leading-tight">státní<br>zkouška</div>
+                    </div>
+                    <div class="bg-cream aspect-square flex flex-col items-center justify-center p-4 text-center">
+                        <div class="text-3xl font-bold text-navy mb-1">PO</div>
+                        <div class="text-navy/60 text-xs leading-tight">technici<br>požární ochrany</div>
+                    </div>
+                    <div class="bg-gold aspect-square flex flex-col items-center justify-center p-4 text-center col-span-2">
+                        <div class="text-white text-sm font-semibold leading-snug text-center">"Fyzicky na vašem pracovišti. Nikdy jen e-mailem."</div>
+                    </div>
+                    <div class="bg-cream aspect-square flex flex-col items-center justify-center p-4 text-center">
+                        <div class="text-3xl font-bold text-navy mb-1">EMS</div>
+                        <div class="text-navy/60 text-xs leading-tight">specialisté<br>ŽP</div>
+                    </div>
+                </div>
+                <p class="text-gray-400 text-xs mt-4 text-center italic">Fotografie skutečného týmu budou doplněny.</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- ════════════════════════════════════════
+     S KÝM SPOLUPRACUJEME
+════════════════════════════════════════ -->
+<section class="bg-cream py-24 px-6">
+    <div class="max-w-6xl mx-auto">
+
+        <div class="max-w-2xl mb-12 reveal">
+            <p class="text-gold text-xs tracking-[0.35em] uppercase mb-4">Partneři</p>
+            <h2 class="font-serif text-3xl lg:text-4xl font-bold text-navy leading-tight mb-5">S kým spolupracujeme</h2>
+        </div>
+
+        <div class="partner-card bg-white reveal">
+            <div class="grid lg:grid-cols-3 gap-10 items-start">
+                <div class="lg:col-span-1">
+                    <div class="inline-flex items-center gap-3 mb-6">
+                        <div class="w-12 h-12 bg-navy flex items-center justify-center flex-shrink-0">
+                            <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z"/><path stroke-linecap="round" stroke-linejoin="round" d="M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z"/></svg>
+                        </div>
+                        <div>
+                            <div class="text-navy font-bold text-lg leading-none">Správa PO</div>
+                            <a href="https://www.spravapo.cz" target="_blank" rel="noopener" class="text-gold text-xs">spravapo.cz ↗</a>
+                        </div>
+                    </div>
+                    <p class="text-xs text-gray-400 uppercase tracking-widest font-semibold">Technické revize PO</p>
+                </div>
+                <div class="lg:col-span-2">
+                    <p class="text-gray-700 text-base leading-relaxed mb-4">
+                        Pro technické revize v oblasti požární ochrany — hasicí přístroje, požární hydranty, požární klapky, nouzové osvětlení — spolupracujeme s odborným partnerem <a href="https://www.spravapo.cz" target="_blank" rel="noopener" class="text-link-ext">Správa PO</a>. Jejich technici mají potřebná oprávnění a certifikace od výrobců konkrétních zařízení.
+                    </p>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        Proč to tak děláme? Protože revize požárně bezpečnostních zařízení vyžadují jiný typ certifikace než zpracování dokumentace nebo školení zaměstnanců. Místo toho, abychom se tvářili, že umíme všechno, spolupracujeme s lidmi, kteří na danou věc skutečně mají. Pro vás to znamená jednu smlouvu a jeden kontakt — vše ostatní řešíme my.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- ════════════════════════════════════════
+     JAK PRACUJEME
+════════════════════════════════════════ -->
+<section class="bg-white py-24 px-6">
+    <div class="max-w-6xl mx-auto">
+
+        <div class="max-w-2xl mb-16 reveal">
+            <p class="text-gold text-xs tracking-[0.35em] uppercase mb-4">Náš přístup</p>
+            <h2 class="font-serif text-3xl lg:text-4xl font-bold text-navy leading-tight">Jak pracujeme</h2>
+        </div>
+
+        <!-- Steps desktop (horizontal) / mobile (vertical) -->
+        <div class="hidden lg:grid grid-cols-3 gap-0 mb-14 reveal">
+            <!-- Step connectors row -->
+            <div class="relative">
+                <div class="flex items-center mb-6">
+                    <div class="step-num">1</div>
+                    <div class="step-connector"></div>
+                </div>
+            </div>
+            <div class="relative">
+                <div class="flex items-center mb-6">
+                    <div class="step-num">2</div>
+                    <div class="step-connector"></div>
+                </div>
+            </div>
+            <div class="relative">
+                <div class="flex items-center mb-6">
+                    <div class="step-num">3</div>
+                </div>
+            </div>
+        </div>
+        <div class="hidden lg:grid grid-cols-3 gap-12 reveal" style="transition-delay:.1s">
+            <div>
+                <h3 class="text-navy font-bold text-base mb-3">Vstupní audit</h3>
+                <p class="text-gray-600 text-sm leading-relaxed">Přijedeme k vám, projdeme pracoviště, zkontrolujeme stávající dokumentaci a zjistíme, co chybí, co je zastaralé a co funguje. Výsledkem je konkrétní plán — ne obecný seznam doporučení.</p>
+            </div>
+            <div>
+                <h3 class="text-navy font-bold text-base mb-3">Nastavení systému</h3>
+                <p class="text-gray-600 text-sm leading-relaxed">Zpracujeme dokumentaci, naplánujeme školení, domluvíme revize. Nastavíme systém tak, aby vás nemusel trápit každý den — ale abyste věděli, že funguje.</p>
+            </div>
+            <div>
+                <h3 class="text-navy font-bold text-base mb-3">Průběžná spolupráce</h3>
+                <p class="text-gray-600 text-sm leading-relaxed">Hlídáme termíny, informujeme vás o změnách v legislativě, aktualizujeme dokumentaci. Jednou za čas přijdeme na kontrolní prověrku. A pokud cokoliv potřebujete vyřešit mimo plán, ozvěte se — reagujeme rychle.</p>
+            </div>
+        </div>
+
+        <!-- Mobile steps (vertical) -->
+        <div class="lg:hidden space-y-8 reveal">
+            <div class="flex gap-6">
+                <div class="flex flex-col items-center">
+                    <div class="step-num">1</div>
+                    <div class="w-px flex-1 mt-3" style="background:rgba(245,163,0,.25)"></div>
+                </div>
+                <div class="pb-8">
+                    <h3 class="text-navy font-bold text-base mb-2">Vstupní audit</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">Přijedeme k vám, projdeme pracoviště, zkontrolujeme dokumentaci a zjistíme, co chybí a co funguje. Výsledkem je konkrétní plán — ne obecný seznam doporučení.</p>
+                </div>
+            </div>
+            <div class="flex gap-6">
+                <div class="flex flex-col items-center">
+                    <div class="step-num">2</div>
+                    <div class="w-px flex-1 mt-3" style="background:rgba(245,163,0,.25)"></div>
+                </div>
+                <div class="pb-8">
+                    <h3 class="text-navy font-bold text-base mb-2">Nastavení systému</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">Zpracujeme dokumentaci, naplánujeme školení, domluvíme revize. Nastavíme systém tak, aby vás nemusel trápit každý den.</p>
+                </div>
+            </div>
+            <div class="flex gap-6">
+                <div class="flex flex-col items-center">
+                    <div class="step-num">3</div>
+                </div>
+                <div>
+                    <h3 class="text-navy font-bold text-base mb-2">Průběžná spolupráce</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">Hlídáme termíny, informujeme o změnách, aktualizujeme dokumentaci. Pokud cokoliv potřebujete mimo plán, ozvěte se — reagujeme rychle.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-16 border-l-4 border-gold pl-8 max-w-2xl reveal" style="transition-delay:.15s">
+            <p class="text-gray-700 text-base lg:text-lg leading-relaxed italic">
+                "Věříme, že dobrý vztah s klientem nestojí na papírech, ale na tom, že víte, na koho se obrátit. A že ten člověk zvedne telefon."
+            </p>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- ════════════════════════════════════════
+     KDE NÁS NAJDETE
+════════════════════════════════════════ -->
+<section style="background:#0B1929" class="py-24 px-6">
+    <div class="max-w-6xl mx-auto">
+
+        <div class="mb-12 reveal">
+            <p class="text-gold text-xs tracking-[0.35em] uppercase mb-4">Kontakt</p>
+            <h2 class="font-serif text-3xl lg:text-4xl font-bold text-white leading-tight">Kde nás najdete</h2>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-white/10">
+
+            <div class="bg-navy p-10 reveal">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-8 h-8 bg-gold/15 flex items-center justify-center flex-shrink-0">
+                        <svg class="w-4 h-4 text-gold" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                    </div>
+                    <p class="text-gold text-[10px] tracking-[0.25em] uppercase font-semibold">Kancelář</p>
+                </div>
+                <address class="not-italic">
+                    <p class="text-white font-semibold text-base mb-1">Resslova 935/3</p>
+                    <p class="text-white/70 text-sm">500 02 Hradec Králové</p>
+                    <p class="text-white/40 text-xs mt-4">Doručovací adresa · klientské schůzky</p>
+                </address>
+            </div>
+
+            <div class="bg-navy p-10 reveal" style="transition-delay:.06s">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-8 h-8 bg-gold/15 flex items-center justify-center flex-shrink-0">
+                        <svg class="w-4 h-4 text-gold" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+                    </div>
+                    <p class="text-gold text-[10px] tracking-[0.25em] uppercase font-semibold">Sídlo společnosti</p>
+                </div>
+                <address class="not-italic">
+                    <p class="text-white font-semibold text-base mb-1">Rumunská 219, Josefov</p>
+                    <p class="text-white/70 text-sm">551 02 Jaroměř</p>
+                    <p class="text-white/40 text-xs mt-4">Správa BOZP s.r.o. · zapsáno v OR</p>
+                </address>
+            </div>
+
+            <div class="bg-navy p-10 reveal" style="transition-delay:.12s">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-8 h-8 bg-gold/15 flex items-center justify-center flex-shrink-0">
+                        <svg class="w-4 h-4 text-gold" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                    </div>
+                    <p class="text-gold text-[10px] tracking-[0.25em] uppercase font-semibold">Identifikační údaje</p>
+                </div>
+                <dl class="space-y-2.5">
+                    <div class="flex justify-between items-baseline">
+                        <dt class="text-white/50 text-xs">IČ</dt>
+                        <dd class="text-white text-sm font-medium tabular-nums">07414552</dd>
+                    </div>
+                    <div class="border-t border-white/8"></div>
+                    <div class="flex justify-between items-baseline">
+                        <dt class="text-white/50 text-xs">Datová schránka</dt>
+                        <dd class="text-white text-sm font-medium">5hviy3m</dd>
+                    </div>
+                    <div class="border-t border-white/8"></div>
+                    <div class="flex justify-between items-baseline">
+                        <dt class="text-white/50 text-xs">Číslo účtu</dt>
+                        <dd class="text-white text-sm font-medium tabular-nums">1027014087/6100</dd>
+                    </div>
+                </dl>
+            </div>
+
+        </div>
+
+        <p class="text-white/40 text-sm mt-6 reveal" style="transition-delay:.18s">
+            Pracujeme s klienty po celé České republice. Část agendy lze řešit vzdáleně, fyzické návštěvy pracoviště plánujeme podle rozsahu spolupráce a vzdálenosti.
+        </p>
+
+    </div>
+</section>
+
+
+<!-- ════════════════════════════════════════
+     OZVĚTE SE — CTA
+════════════════════════════════════════ -->
+<section id="ozvete-se" class="bg-cream py-24 px-6">
+    <div class="max-w-4xl mx-auto text-center reveal">
+        <p class="text-gold text-xs tracking-[0.35em] uppercase mb-4">Ozvěte se</p>
+        <h2 class="font-serif text-3xl lg:text-4xl font-bold text-navy leading-tight mb-5">Nezávazně probereme, co vaše firma potřebuje</h2>
+        <p class="text-gray-600 text-base leading-relaxed mb-12 max-w-xl mx-auto">
+            Navrhneme způsob spolupráce, který dává smysl. Jsme dostupní v pracovní době i mimo ni pro urgentní záležitosti.
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
+            <a href="tel:+420737517995" class="flex items-center gap-4 bg-navy hover:bg-navy-l text-white px-8 py-5 transition group">
+                <div class="w-10 h-10 bg-gold/20 flex items-center justify-center flex-shrink-0">
+                    <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                </div>
+                <div class="text-left">
+                    <div class="text-white/60 text-[10px] tracking-[0.2em] uppercase mb-0.5">Telefon</div>
+                    <div class="text-white font-bold text-lg tabular-nums">+420 737 517 995</div>
+                </div>
+            </a>
+            <a href="mailto:asistentka@spravaBOZP.cz" class="flex items-center gap-4 bg-white border-2 border-navy/10 hover:border-gold/40 text-navy px-8 py-5 transition group">
+                <div class="w-10 h-10 bg-gold/10 flex items-center justify-center flex-shrink-0">
+                    <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                </div>
+                <div class="text-left">
+                    <div class="text-navy/50 text-[10px] tracking-[0.2em] uppercase mb-0.5">E-mail</div>
+                    <div class="text-navy font-bold text-base break-all">asistentka@spravaBOZP.cz</div>
+                </div>
+            </a>
+        </div>
+    </div>
+</section>
+
+
+<!-- ════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════ -->
+<footer class="bg-gold pt-16 pb-8 px-6">
+    <div class="max-w-7xl mx-auto">
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-10 pb-14 border-b border-black/10">
+
+            <div class="lg:col-span-1">
+                <a href="index.html" class="flex items-center mb-6">
+                    <img src="img./logo-full-navy.png" alt="Správa BOZP s.r.o." class="h-9 w-auto">
+                </a>
+                <p class="text-navy/75 text-sm leading-relaxed">Specialisté na bezpečnost práce a požární ochranu. Komplexní outsourcing BOZP pro podniky všech velikostí.</p>
+            </div>
+
+            <div>
+                <h4 class="text-navy text-[10px] font-bold uppercase tracking-[0.25em] mb-6">Služby</h4>
+                <ul class="space-y-3">
+                    <li><a href="bozp.html"                  class="text-navy/70 text-sm hover:text-navy transition">BOZP</a></li>
+                    <li><a href="pozarni-ochrana.html"       class="text-navy/70 text-sm hover:text-navy transition">Požární ochrana</a></li>
+                    <li><a href="zivotni-prostredi-ems.html" class="text-navy/70 text-sm hover:text-navy transition">Životní prostředí - EMS</a></li>
+                    <li><a href="obce.html"                  class="text-navy/70 text-sm hover:text-navy transition">Obce</a></li>
+                    <li><a href="slovnicek-pojmu.html"       class="text-navy/70 text-sm hover:text-navy transition">Slovníček pojmů</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="text-navy text-[10px] font-bold uppercase tracking-[0.25em] mb-6">Společnost</h4>
+                <ul class="space-y-3">
+                    <li><a href="o-nas.html"        class="text-navy font-semibold text-sm hover:text-navy transition">O nás</a></li>
+                    <li><a href="partneri.html"      class="text-navy/70 text-sm hover:text-navy transition">Partneři</a></li>
+                    <li><a href="index.html#kontakt" class="text-navy/70 text-sm hover:text-navy transition">Kontakt</a></li>
+                    <li><a href="#"                  class="text-navy/70 text-sm hover:text-navy transition">Ochrana osobních údajů</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="text-navy text-[10px] font-bold uppercase tracking-[0.25em] mb-6">Kontakt</h4>
+                <address class="not-italic space-y-3 text-navy/70 text-sm">
+                    <p>Resslova 935/3<br>500 02 Hradec Králové</p>
+                    <a href="tel:+420737517995"               class="block hover:text-navy transition font-medium">+420 737 517 995</a>
+                    <a href="mailto:asistentka@spravaBOZP.cz" class="block hover:text-navy transition break-all">asistentka@spravaBOZP.cz</a>
+                </address>
+            </div>
+
+        </div>
+
+        <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p class="text-navy/60 text-xs">© 2024 Správa BOZP s.r.o. Všechna práva vyhrazena.</p>
+            <a href="mapa-stranek.html" class="text-navy/60 text-xs hover:text-navy transition">Mapa stránek</a>
+        </div>
+
+    </div>
+</footer>
+
+
+<!-- ════════════════════════════════════════
+     JAVASCRIPT
+════════════════════════════════════════ -->
+<script>
+    // ── Navbar ──
+    const nav = document.getElementById('navbar');
+    const mobMenu = document.getElementById('mob-menu');
+    function updateNavState() {
+        nav.classList.toggle('scrolled', window.scrollY > 60 || mobMenu.classList.contains('open'));
+    }
+    window.addEventListener('scroll', updateNavState, { passive: true });
+    updateNavState();
+
+    const ham = document.getElementById('ham');
+    ham.addEventListener('click', () => {
+        mobMenu.classList.toggle('open');
+        ham.classList.toggle('open');
+        updateNavState();
+    });
+
+    // ── Mobile accordion dropdowns ──
+    ['sluzby', 'spolecnost'].forEach(key => {
+        const btn   = document.getElementById('mob-' + key + '-btn');
+        const panel = document.getElementById('mob-' + key);
+        const icon  = document.getElementById('mob-' + key + '-icon');
+        if (!btn) return;
+        btn.addEventListener('click', () => {
+            const isOpen = panel.style.maxHeight && panel.style.maxHeight !== '0px';
+            panel.style.maxHeight = isOpen ? '0px' : panel.scrollHeight + 'px';
+            icon.style.transform  = isOpen ? '' : 'rotate(180deg)';
+        });
+    });
+
+    // ── Reveal on scroll ──
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+<script src="popup.js" defer></script>
+</body>
+</html>

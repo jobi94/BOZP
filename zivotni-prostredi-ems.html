@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Životní prostředí — EMS — Správa BOZP s.r.o.</title>
+    <title>Životní prostředí a EMS — Správa BOZP s.r.o.</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -16,7 +16,7 @@
                         'gold-l':'#F7B733',
                         cream:   '#F7F4EE',
                         crimson: '#E63939',
-                        red:     '#E63939',
+                        green:   '#2A7A3C',
                     },
                     fontFamily: {
                         serif: ['Poppins', 'system-ui', 'sans-serif'],
@@ -27,12 +27,12 @@
         }
     </script>
     <style>
-        @font-face { font-family:'Poppins'; src:url('Poppins/Poppins-Regular.ttf')          format('truetype'); font-weight:400; font-style:normal; font-display:swap; }
-        @font-face { font-family:'Poppins'; src:url('Poppins/Poppins-Italic.ttf')           format('truetype'); font-weight:400; font-style:italic; font-display:swap; }
-        @font-face { font-family:'Poppins'; src:url('Poppins/Poppins-Medium.ttf')           format('truetype'); font-weight:500; font-style:normal; font-display:swap; }
-        @font-face { font-family:'Poppins'; src:url('Poppins/Poppins-SemiBold.ttf')         format('truetype'); font-weight:600; font-style:normal; font-display:swap; }
-        @font-face { font-family:'Poppins'; src:url('Poppins/Poppins-Bold.ttf')             format('truetype'); font-weight:700; font-style:normal; font-display:swap; }
-        @font-face { font-family:'Poppins'; src:url('Poppins/Poppins-BoldItalic.ttf')       format('truetype'); font-weight:700; font-style:italic; font-display:swap; }
+        @font-face { font-family:'Poppins'; src:url('Poppins/Poppins-Regular.ttf')    format('truetype'); font-weight:400; font-style:normal;  font-display:swap; }
+        @font-face { font-family:'Poppins'; src:url('Poppins/Poppins-Italic.ttf')     format('truetype'); font-weight:400; font-style:italic;  font-display:swap; }
+        @font-face { font-family:'Poppins'; src:url('Poppins/Poppins-Medium.ttf')     format('truetype'); font-weight:500; font-style:normal;  font-display:swap; }
+        @font-face { font-family:'Poppins'; src:url('Poppins/Poppins-SemiBold.ttf')   format('truetype'); font-weight:600; font-style:normal;  font-display:swap; }
+        @font-face { font-family:'Poppins'; src:url('Poppins/Poppins-Bold.ttf')       format('truetype'); font-weight:700; font-style:normal;  font-display:swap; }
+        @font-face { font-family:'Poppins'; src:url('Poppins/Poppins-BoldItalic.ttf') format('truetype'); font-weight:700; font-style:italic;  font-display:swap; }
 
         *, *::before, *::after { box-sizing: border-box; }
         body { font-family: 'Poppins', sans-serif; }
@@ -41,7 +41,6 @@
         /* ── Navbar ── */
         #navbar { transition: padding 0.3s, box-shadow 0.3s; }
         #navbar.scrolled { box-shadow: 0 2px 24px rgba(0,0,0,.12); }
-
         .nav-bg-white  { position:absolute; inset:0; background:#fff; clip-path: polygon(0 0,71% 0,65% 100%,0 100%); z-index:0; }
         .nav-bg-accent { position:absolute; inset:0; background:transparent; clip-path: polygon(71% 0,100% 0,100% 100%,65% 100%); z-index:0; pointer-events:none; transition: background .3s; }
         #navbar.scrolled .nav-bg-accent { background: #657eb4; }
@@ -54,11 +53,57 @@
         #mob-menu { position:absolute; top:100%; right:0; width:50%; min-width:260px; max-height:0; overflow:hidden; transition:max-height .35s ease; }
         #mob-menu.open { max-height:600px; }
 
-        /* ── Hamburger animation ── */
+        /* ── Hamburger ── */
         .ham-line { display:block; width:22px; height:2px; background:currentColor; border-radius:2px; transition:transform .3s ease, opacity .3s ease; }
         #ham.open .ham-line:nth-child(1) { transform:translateY(8px) rotate(45deg); }
         #ham.open .ham-line:nth-child(2) { opacity:0; transform:scaleX(0); }
         #ham.open .ham-line:nth-child(3) { transform:translateY(-8px) rotate(-45deg); }
+
+        /* ── Info card (hero) ── */
+        .info-card-wrap { position:relative; padding-top:24px; padding-left:20px; max-width:32rem; margin-top:2rem; }
+        .info-chip { position:absolute; top:0; left:0; width:52px; height:52px; background:#F5A300; display:flex; align-items:center; justify-content:center; z-index:10; box-shadow:0 4px 16px rgba(0,0,0,.35); }
+        .info-chip span { font-size:1.9rem; font-weight:900; color:#fff; line-height:1; font-family:Georgia,serif; user-select:none; }
+        .info-card { background:#f7f4ee; border-top:3px solid #F5A300; box-shadow:0 8px 32px rgba(0,0,0,.32); cursor:pointer; outline:none; -webkit-tap-highlight-color:transparent; }
+        .info-card:focus-visible { outline:2px solid #F5A300; outline-offset:3px; }
+        .info-card__header { display:flex; align-items:center; gap:16px; padding:20px 20px 18px 36px; }
+        .info-card__meta { flex:1; min-width:0; }
+        .info-card__ref { display:block; font-size:10px; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:#F5A300; margin-bottom:3px; }
+        .info-card__title { display:block; font-size:13.5px; font-weight:700; color:#0B1929; line-height:1.3; }
+        .info-card__chevron { width:32px; height:32px; border-radius:50%; background:#F5A300; display:flex; align-items:center; justify-content:center; flex-shrink:0; transition:background .2s ease; }
+        .info-card__chevron svg { transition:transform .35s cubic-bezier(.4,0,.2,1); }
+        .info-card[aria-expanded="true"] .info-card__chevron svg { transform:rotate(180deg); }
+        .info-divider-grid { display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s cubic-bezier(.4,0,.2,1); }
+        .info-card[aria-expanded="true"] .info-divider-grid { grid-template-rows:1fr; }
+        .info-divider-grid > div { overflow:hidden; }
+        .info-divider-line { height:1px; background:rgba(245,163,0,.22); margin:0 20px 0 36px; }
+        .info-body-grid { display:grid; grid-template-rows:0fr; transition:grid-template-rows .5s cubic-bezier(.4,0,.2,1); }
+        .info-card[aria-expanded="true"] .info-body-grid { grid-template-rows:1fr; }
+        .info-body-grid > div { overflow:hidden; }
+        .info-body { padding:16px 20px 24px 36px; }
+        .info-body p { font-size:13.5px; line-height:1.8; color:#374151; font-weight:400; }
+        .info-footnote { display:flex; align-items:center; gap:8px; margin-top:14px; padding-top:14px; border-top:1px solid rgba(245,163,0,.15); }
+        .info-footnote-dot { width:6px; height:6px; background:#F5A300; border-radius:50%; flex-shrink:0; }
+        .info-footnote-text { font-size:11px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:#F5A300; }
+
+        /* ── Step numbers ── */
+        .step-number { font-size:5rem; font-weight:700; line-height:1; color:rgba(245,163,0,.18); font-family:'Poppins',sans-serif; }
+
+        /* ── FAQ accordion ── */
+        .faq-item { background:#fff; border:1px solid rgba(11,25,41,.10); transition:border-color .25s ease, box-shadow .25s ease; }
+        .faq-item.is-open { border-color:#F5A300; box-shadow:0 4px 24px rgba(245,163,0,.10); }
+        .faq-trigger { display:flex; align-items:center; justify-content:space-between; gap:16px; width:100%; padding:24px; background:transparent; border:none; cursor:pointer; text-align:left; font-family:'Poppins',sans-serif; font-size:1rem; font-weight:700; color:#0B1929; }
+        .faq-trigger:focus-visible { outline:2px solid #F5A300; outline-offset:2px; }
+        .faq-icon { width:20px; height:20px; color:#F5A300; flex-shrink:0; transition:transform .35s cubic-bezier(.4,0,.2,1); }
+        .faq-item.is-open .faq-icon { transform:rotate(45deg); }
+        .faq-body-grid { display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s cubic-bezier(.4,0,.2,1); }
+        .faq-item.is-open .faq-body-grid { grid-template-rows:1fr; }
+        .faq-body-grid > div { overflow:hidden; }
+        .faq-body { padding:0 24px 24px; font-size:.875rem; line-height:1.85; color:#6b7280; }
+
+        @media (prefers-reduced-motion:reduce) {
+            .faq-body-grid,.faq-icon,.info-card__chevron,.info-card__chevron svg,
+            .info-divider-grid,.info-body-grid { transition:none; }
+        }
     </style>
 </head>
 <body class="bg-white text-gray-800 antialiased">
@@ -66,89 +111,71 @@
 <!-- ════════════════════════════════════════
      NAVIGATION
 ════════════════════════════════════════ -->
-<nav id="navbar" class="fixed top-0 inset-x-0 z-50 scrolled">
+<nav id="navbar" class="fixed top-0 inset-x-0 z-50">
     <div class="relative py-5 px-6 lg:px-12">
     <div class="nav-bg-white"></div>
     <div class="nav-bg-accent"></div>
     <div class="relative z-10 max-w-7xl mx-auto flex items-center justify-between">
 
-        <!-- Logo -->
         <a href="index.html" class="flex items-center group">
             <img src="img./logo-full.avif" alt="Správa BOZP s.r.o." class="h-9 w-auto">
         </a>
 
-        <!-- Desktop links -->
         <div class="hidden lg:flex items-center gap-10">
-            <a href="index.html#domu"    class="text-navy/70 hover:text-navy text-xs tracking-[0.15em] uppercase transition">Domů</a>
+            <a href="index.html#domu" class="text-navy/70 hover:text-navy text-xs tracking-[0.15em] uppercase transition">Domů</a>
 
-            <!-- Služby dropdown -->
             <div class="relative group">
-                <span class="flex items-center gap-1 cursor-pointer text-navy group-hover:text-navy text-xs tracking-[0.15em] uppercase transition">
+                <span class="flex items-center gap-1 cursor-pointer text-navy text-xs tracking-[0.15em] uppercase transition">
                     Služby
-                    <svg class="w-3 h-3 transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
-                    </svg>
+                    <svg class="w-3 h-3 transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
                 </span>
                 <div class="absolute left-1/2 -translate-x-1/2 top-full pt-3 opacity-0 invisible translate-y-1 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-200 z-20">
                     <div class="bg-white shadow-lg border border-gray-100 py-2 min-w-[220px]">
-                        <a href="bozp.html"                 class="block px-5 py-2.5 text-navy/70 hover:text-navy hover:bg-gray-50 text-xs tracking-[0.1em] uppercase transition whitespace-nowrap">BOZP</a>
-                        <a href="pozarni-ochrana.html"      class="block px-5 py-2.5 text-navy/70 hover:text-navy hover:bg-gray-50 text-xs tracking-[0.1em] uppercase transition whitespace-nowrap">Požární ochrana</a>
+                        <a href="bozp.html"                  class="block px-5 py-2.5 text-navy/70 hover:text-navy hover:bg-gray-50 text-xs tracking-[0.1em] uppercase transition whitespace-nowrap">BOZP</a>
+                        <a href="pozarni-ochrana.html"       class="block px-5 py-2.5 text-navy/70 hover:text-navy hover:bg-gray-50 text-xs tracking-[0.1em] uppercase transition whitespace-nowrap">Požární ochrana</a>
                         <a href="zivotni-prostredi-ems.html" class="block px-5 py-2.5 text-navy hover:bg-gray-50 text-xs tracking-[0.1em] uppercase transition whitespace-nowrap">Životní prostředí - EMS</a>
-                        <a href="obce.html"                 class="block px-5 py-2.5 text-navy/70 hover:text-navy hover:bg-gray-50 text-xs tracking-[0.1em] uppercase transition whitespace-nowrap">Obce</a>
-                        <a href="slovnicek-pojmu.html"      class="block px-5 py-2.5 text-navy/70 hover:text-navy hover:bg-gray-50 text-xs tracking-[0.1em] uppercase transition whitespace-nowrap">Slovníček pojmů</a>
+                        <a href="obce.html"                  class="block px-5 py-2.5 text-navy/70 hover:text-navy hover:bg-gray-50 text-xs tracking-[0.1em] uppercase transition whitespace-nowrap">Obce</a>
+                        <a href="slovnicek-pojmu.html"       class="block px-5 py-2.5 text-navy/70 hover:text-navy hover:bg-gray-50 text-xs tracking-[0.1em] uppercase transition whitespace-nowrap">Slovníček pojmů</a>
                     </div>
                 </div>
             </div>
 
             <a href="partneri.html" class="text-navy/70 hover:text-navy text-xs tracking-[0.15em] uppercase transition">Partneři</a>
 
-            <!-- Společnost dropdown -->
             <div class="relative group">
                 <span class="flex items-center gap-1 cursor-pointer text-navy/70 group-hover:text-navy text-xs tracking-[0.15em] uppercase transition">
                     Společnost
-                    <svg class="w-3 h-3 transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
-                    </svg>
+                    <svg class="w-3 h-3 transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
                 </span>
                 <div class="absolute left-1/2 -translate-x-1/2 top-full pt-3 opacity-0 invisible translate-y-1 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-200 z-20">
                     <div class="bg-white shadow-lg border border-gray-100 py-2 min-w-[160px]">
-                        <a href="index.html#o-nas"   class="block px-5 py-2.5 text-navy/70 hover:text-navy hover:bg-gray-50 text-xs tracking-[0.1em] uppercase transition">O nás</a>
+                        <a href="o-nas.html"   class="block px-5 py-2.5 text-navy/70 hover:text-navy hover:bg-gray-50 text-xs tracking-[0.1em] uppercase transition">O nás</a>
                         <a href="index.html#kontakt" class="block px-5 py-2.5 text-navy/70 hover:text-navy hover:bg-gray-50 text-xs tracking-[0.1em] uppercase transition">Kontakt</a>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- CTA -->
         <a href="index.html#kontakt" class="hidden lg:inline-block bg-gold hover:bg-gold-l text-white text-xs px-6 py-3 tracking-[0.2em] uppercase transition font-medium">
             Kontaktujte nás
         </a>
 
-        <!-- Email icon (mobile/tablet only) -->
         <div class="lg:hidden flex items-center gap-2">
-        <a href="mailto:asistentka@spravaBOZP.cz" class="flex items-center justify-center w-9 h-9 rounded-full bg-gold flex-shrink-0" aria-label="E-mail">
-            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                <line x1="22" y1="2" x2="11" y2="13"/>
-                <polygon points="22 2 15 22 11 13 2 9 22 2"/>
-            </svg>
-        </a>
-                <!-- Hamburger -->
-        <button id="ham" class="text-white p-2 flex flex-col gap-1.5" aria-label="Menu">
+            <a href="mailto:asistentka@spravaBOZP.cz" class="flex items-center justify-center w-9 h-9 rounded-full bg-gold flex-shrink-0" aria-label="E-mail">
+                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            </a>
+            <button id="ham" class="text-white p-2 flex flex-col gap-1.5" aria-label="Menu">
                 <span class="ham-line"></span>
                 <span class="ham-line"></span>
                 <span class="ham-line"></span>
             </button>
         </div>
-        </div>
     </div>
     </div>
 
-    <!-- Mobile menu -->
     <div id="mob-menu" class="lg:hidden overflow-hidden">
         <div class="w-full shadow-xl px-6 py-2" style="background:#657eb4;border-top:1px solid rgba(255,255,255,.15)">
             <a href="index.html#domu" class="flex items-center whitespace-nowrap text-white/80 hover:text-white py-3 text-sm font-medium transition border-b border-white/10">Domů</a>
-
-            <!-- Služby accordion -->
             <div class="border-b border-white/10">
                 <button id="mob-sluzby-btn" class="flex items-center justify-between w-full text-white/80 hover:text-white py-3 text-sm font-medium transition">
                     <span>Služby</span>
@@ -163,83 +190,441 @@
                     <div class="pb-2"></div>
                 </div>
             </div>
-
             <a href="partneri.html" class="flex items-center whitespace-nowrap text-white/80 hover:text-white py-3 text-sm font-medium transition border-b border-white/10">Partneři</a>
-
-            <!-- Společnost accordion -->
             <div class="border-b border-white/10">
                 <button id="mob-spolecnost-btn" class="flex items-center justify-between w-full text-white/80 hover:text-white py-3 text-sm font-medium transition">
                     <span>Společnost</span>
                     <svg id="mob-spolecnost-icon" class="w-3.5 h-3.5 transition-transform duration-200 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
                 </button>
                 <div id="mob-spolecnost" class="overflow-hidden" style="max-height:0;transition:max-height .3s ease">
-                    <a href="index.html#o-nas"   class="block text-white/70 hover:text-white py-2 pl-4 text-sm transition">O nás</a>
+                    <a href="o-nas.html"   class="block text-white/70 hover:text-white py-2 pl-4 text-sm transition">O nás</a>
                     <a href="index.html#kontakt" class="block text-white/70 hover:text-white py-2 pl-4 text-sm transition">Kontakt</a>
                     <div class="pb-2"></div>
                 </div>
             </div>
         </div>
     </div>
-    </div>
 </nav>
 
 
 <!-- ════════════════════════════════════════
-     PAGE HEADER
+     HERO
 ════════════════════════════════════════ -->
-<section class="pt-44 pb-20 px-6 relative overflow-hidden" style="background:#657eb4">
-    <div class="absolute inset-0 opacity-[0.05]"
-         style="background-image:linear-gradient(rgba(245,163,0,1) 1px,transparent 1px),linear-gradient(90deg,rgba(245,163,0,1) 1px,transparent 1px);background-size:48px 48px">
-    </div>
-    <div class="max-w-7xl mx-auto relative z-10 reveal visible">
-        <p class="text-gold text-xs tracking-[0.3em] uppercase mb-4">Naše služby</p>
-        <h1 class="font-serif text-4xl lg:text-5xl font-bold text-white">EMS — životní prostředí.</h1>
-    </div>
-</section>
-
-
-<!-- ════════════════════════════════════════
-     OBSAH
-════════════════════════════════════════ -->
-<section class="bg-cream py-24 px-6">
-    <div class="max-w-4xl mx-auto reveal">
-        <p class="text-gray-500 text-lg leading-relaxed mb-12">
-            Pro firmy s dopadem na životní prostředí zajišťujeme konzultace, pravidelná hlášení a zpracování metodiky a dokumentace pro čistírny odpadních vod (ČOV). Pomůžeme nastavit systém environmentálního managementu tak, aby odpovídal vašemu provozu i platné legislativě.
-        </p>
-
-        <div class="grid sm:grid-cols-2 gap-x-10 gap-y-4">
-            <div class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-green-700 flex-shrink-0 mt-2"></span><span class="text-navy text-sm">Konzultace v oblasti životního prostředí</span></div>
-            <div class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-green-700 flex-shrink-0 mt-2"></span><span class="text-navy text-sm">Pravidelná hlášení a evidence</span></div>
-            <div class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-green-700 flex-shrink-0 mt-2"></span><span class="text-navy text-sm">Metodika a dokumentace pro ČOV</span></div>
-            <div class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-green-700 flex-shrink-0 mt-2"></span><span class="text-navy text-sm">Nastavení systému environmentálního managementu</span></div>
-            <div class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-green-700 flex-shrink-0 mt-2"></span><span class="text-navy text-sm">Soulad s platnou legislativou</span></div>
+<section class="relative overflow-hidden" style="background:#0B1929">
+    <img src="img./esm.avif" alt="" class="absolute inset-0 w-full h-full object-cover object-center">
+    <div class="absolute inset-0" style="background:linear-gradient(115deg, rgba(11,25,41,.75) 0%, rgba(11,25,41,.60) 38%, rgba(11,25,41,.30) 70%, rgba(11,25,41,.15) 100%)"></div>
+    <div class="absolute top-1/4 right-8 lg:right-24 w-64 lg:w-96 h-64 lg:h-96 border border-gold/10 rotate-45 pointer-events-none z-[1]"></div>
+    <div class="absolute top-1/3 right-16 lg:right-36 w-40 lg:w-60 h-40 lg:h-60 border border-gold/8 rotate-45 pointer-events-none z-[1]"></div>
+    <div class="absolute left-0 top-0 w-1 h-full bg-gradient-to-b from-transparent via-gold to-transparent opacity-40"></div>
+    <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 pt-44 pb-16 lg:py-44 w-full grid lg:grid-cols-2 gap-16 items-center">
+        <div class="reveal visible" style="transition-delay:0s">
+            <p class="text-gold text-xs tracking-[0.35em] uppercase mb-5">Naše služby · Životní prostředí - EMS</p>
+            <h1 class="font-serif text-4xl lg:text-5xl xl:text-6xl font-bold text-white leading-[1.15] mb-8">
+                EMS a ochrana životního prostředí –<br class="hidden lg:block"> aby vaše firma plnila zákon bez stresu.
+            </h1>
+            <div class="info-card-wrap reveal visible">
+                <div class="info-chip" aria-hidden="true"><span>?</span></div>
+                <div class="info-card" id="infoCard" role="button" tabindex="0" aria-expanded="false" aria-label="O EMS — klikněte pro zobrazení">
+                    <div class="info-card__header">
+                        <div class="info-card__meta">
+                            <span class="info-card__ref">Věděli jste?</span>
+                            <span class="info-card__title">Skoro každá firma má povinnosti v ochraně životního prostředí.</span>
+                        </div>
+                        <div class="info-card__chevron" aria-hidden="true">
+                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 5L7 9.5L11.5 5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </div>
+                    </div>
+                    <div class="info-divider-grid"><div><div class="info-divider-line"></div></div></div>
+                    <div class="info-body-grid"><div>
+                        <div class="info-body">
+                            <p>Ochrana životního prostředí není jen téma pro velké fabriky s komíny. Skoro každá firma produkuje odpady, nakládá s nějakými chemickými látkami nebo vypouští odpadní vody. A ke každé z těchto věcí se váže hromada zákonných povinností, které málokdo sleduje — dokud nepřijde kontrola České inspekce životního prostředí. Pomáháme firmám zorientovat se v environmentální legislativě, nastavit systém EMS a postarat se o průběžnou správu celé agendy.</p>
+                            <div class="info-footnote">
+                                <div class="info-footnote-dot"></div>
+                                <span class="info-footnote-text">Správa BOZP s.r.o.</span>
+                            </div>
+                        </div>
+                    </div></div>
+                </div>
+            </div>
+        </div>
+        <div class="hidden lg:block reveal visible" style="transition-delay:.15s">
+            <div class="ml-auto max-w-sm border border-white/20 p-8 backdrop-blur-md" style="background:rgba(255,255,255,.18)">
+                <p class="text-gold text-[10px] tracking-[0.3em] uppercase mb-5">Co pro vás děláme</p>
+                <p class="text-white/90 text-sm leading-relaxed">
+                    Pomáháme firmám zorientovat se v environmentální legislativě, nastavit systém EMS a postarat se o průběžnou správu — od odpadového hospodářství přes chemické látky až po ochranu ovzduší a vod.
+                </p>
+                <p class="text-white/90 text-sm leading-relaxed mt-4">
+                    Při kontrole ČIŽP budete připraveni. My zajistíme, že všechny povinnosti jsou splněny a doklady v pořádku.
+                </p>
+            </div>
         </div>
     </div>
 </section>
 
 
 <!-- ════════════════════════════════════════
-     CTA BANNER
+     CO JE EMS
+════════════════════════════════════════ -->
+<section class="bg-cream py-24 px-6">
+    <div class="max-w-4xl mx-auto">
+
+        <div class="reveal mb-8">
+            <p class="text-gold text-xs tracking-[0.35em] uppercase mb-4">Základ</p>
+            <h2 class="font-serif text-3xl lg:text-4xl font-bold text-navy mb-6">Co je EMS a proč by vás to mělo zajímat?</h2>
+            <p class="text-gray-500 text-base leading-relaxed mb-5">
+                EMS je zkratka pro Environmental Management System — systém environmentálního managementu. Jednoduše řečeno: způsob, jakým firma systematicky hlídá a řídí svůj dopad na životní prostředí. Může být zavedený podle normy ISO 14001, nebo jen jako interní přístup k plnění zákonných povinností. Tak či tak, bez základní orientace v tom, co zákon po vaší firmě chce, se dříve nebo později dostanete do problémů.
+            </p>
+        </div>
+
+        <!-- Info callout -->
+        <div class="reveal mb-8 flex gap-5 p-6 border-l-4" style="background:rgba(42,122,60,.07);border-color:#2A7A3C">
+            <div class="flex-shrink-0 mt-0.5">
+                <svg class="w-5 h-5" style="color:#2A7A3C" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+            <p class="text-navy text-sm leading-relaxed">
+                <strong class="font-semibold">EMS není povinná certifikace.</strong> Je to nástroj, který pomáhá firmám mít přehled o tom, co dělají s odpady, chemickými látkami, vodami nebo ovzduším — a plnit přitom zákon bez zbytečného stresu.
+            </p>
+        </div>
+
+        <div class="reveal">
+            <p class="text-gray-500 text-base leading-relaxed">
+                Zákonné povinnosti v oblasti ochrany životního prostředí se mění pravidelně. Zákon o odpadech, zákon o ochraně ovzduší, vodní zákon, zákon o chemických látkách — každý z nich obsahuje desítky konkrétních povinností a termínů. Firmy je velmi často neplní ne ze zlé vůle, ale proto, že o nich prostě nevědí. Externího ekologa na plný úvazek si většina malých a středních firem nemůže dovolit. Proto dává smysl outsourcing.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- ════════════════════════════════════════
+     CO ZA VÁS POHLÍDÁME
+════════════════════════════════════════ -->
+<section class="bg-white py-24 px-6">
+    <div class="max-w-6xl mx-auto">
+
+        <div class="reveal mb-4">
+            <p class="text-gold text-xs tracking-[0.35em] uppercase mb-4">Rozsah služby</p>
+            <h2 class="font-serif text-3xl lg:text-4xl font-bold text-navy mb-3">Co za vás pohlídáme</h2>
+            <p class="text-gray-500 text-base leading-relaxed max-w-2xl">
+                Přebíráme agendu podnikové ekologie v rozsahu, který odpovídá vašemu provozu. Ne šablona pro všechny — konkrétní povinnosti právě pro vás, podle toho, co děláte, co vyrábíte a co vypouštíte.
+            </p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-12">
+
+            <!-- Odpadové hospodářství -->
+            <div class="reveal bg-cream p-8 flex flex-col" style="border-top:4px solid #2A7A3C">
+                <div class="flex items-center gap-3 mb-5">
+                    <div class="w-9 h-9 flex items-center justify-center flex-shrink-0" style="background:rgba(42,122,60,.1)">
+                        <svg class="w-5 h-5" style="color:#2A7A3C" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                    </div>
+                    <h3 class="font-serif text-base font-bold text-navy">Odpadové hospodářství</h3>
+                </div>
+                <div class="space-y-2 flex-1">
+                    <div class="flex items-start gap-2"><span class="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-[7px]" style="background:#2A7A3C"></span><span class="text-navy/80 text-sm">Průběžná evidence odpadů</span></div>
+                    <div class="flex items-start gap-2"><span class="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-[7px]" style="background:#2A7A3C"></span><span class="text-navy/80 text-sm">Ohlašování přes ISPOP</span></div>
+                    <div class="flex items-start gap-2"><span class="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-[7px]" style="background:#2A7A3C"></span><span class="text-navy/80 text-sm">Zařazení odpadů dle Katalogu</span></div>
+                    <div class="flex items-start gap-2"><span class="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-[7px]" style="background:#2A7A3C"></span><span class="text-navy/80 text-sm">Značení a nakládání s nebezpečným odpadem</span></div>
+                    <div class="flex items-start gap-2"><span class="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-[7px]" style="background:#2A7A3C"></span><span class="text-navy/80 text-sm">Vedení evidence přepravy NO (SEPNO)</span></div>
+                </div>
+            </div>
+
+            <!-- Chemické látky -->
+            <div class="reveal bg-cream p-8 flex flex-col" style="border-top:4px solid #2A7A3C">
+                <div class="flex items-center gap-3 mb-5">
+                    <div class="w-9 h-9 flex items-center justify-center flex-shrink-0" style="background:rgba(42,122,60,.1)">
+                        <svg class="w-5 h-5" style="color:#2A7A3C" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 3h6m-6 0a1 1 0 00-1 1v4.586a1 1 0 01-.293.707L4.293 12.707A1 1 0 004 13.414V19a2 2 0 002 2h12a2 2 0 002-2v-5.586a1 1 0 00-.293-.707L16.293 9.293A1 1 0 0116 8.586V4a1 1 0 00-1-1m-6 0h6"/></svg>
+                    </div>
+                    <h3 class="font-serif text-base font-bold text-navy">Chemické látky</h3>
+                </div>
+                <div class="space-y-2 flex-1">
+                    <div class="flex items-start gap-2"><span class="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-[7px]" style="background:#2A7A3C"></span><span class="text-navy/80 text-sm">Evidence NCHLS (nebezpečné chem. látky a směsi)</span></div>
+                    <div class="flex items-start gap-2"><span class="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-[7px]" style="background:#2A7A3C"></span><span class="text-navy/80 text-sm">Zpracování písemných pravidel pro nakládání</span></div>
+                    <div class="flex items-start gap-2"><span class="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-[7px]" style="background:#2A7A3C"></span><span class="text-navy/80 text-sm">Bezpečnostní listy a jejich aktualizace</span></div>
+                    <div class="flex items-start gap-2"><span class="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-[7px]" style="background:#2A7A3C"></span><span class="text-navy/80 text-sm">Školení zaměstnanců v oblasti NCHLS</span></div>
+                    <div class="flex items-start gap-2"><span class="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-[7px]" style="background:#2A7A3C"></span><span class="text-navy/80 text-sm">Kontrola skladování a označení</span></div>
+                </div>
+            </div>
+
+            <!-- Ochrana ovzduší -->
+            <div class="reveal bg-cream p-8 flex flex-col" style="border-top:4px solid #2A7A3C">
+                <div class="flex items-center gap-3 mb-5">
+                    <div class="w-9 h-9 flex items-center justify-center flex-shrink-0" style="background:rgba(42,122,60,.1)">
+                        <svg class="w-5 h-5" style="color:#2A7A3C" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/></svg>
+                    </div>
+                    <h3 class="font-serif text-base font-bold text-navy">Ochrana ovzduší</h3>
+                </div>
+                <div class="space-y-2 flex-1">
+                    <div class="flex items-start gap-2"><span class="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-[7px]" style="background:#2A7A3C"></span><span class="text-navy/80 text-sm">Identifikace stacionárních zdrojů znečišťování</span></div>
+                    <div class="flex items-start gap-2"><span class="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-[7px]" style="background:#2A7A3C"></span><span class="text-navy/80 text-sm">Vedení provozní evidence a provozního řádu</span></div>
+                    <div class="flex items-start gap-2"><span class="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-[7px]" style="background:#2A7A3C"></span><span class="text-navy/80 text-sm">Ohlašování emisí přes ISPOP (formulář F_OVZ)</span></div>
+                    <div class="flex items-start gap-2"><span class="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-[7px]" style="background:#2A7A3C"></span><span class="text-navy/80 text-sm">Výpočet spotřeby VOC</span></div>
+                    <div class="flex items-start gap-2"><span class="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-[7px]" style="background:#2A7A3C"></span><span class="text-navy/80 text-sm">Sledování zákonných lhůt a povinností</span></div>
+                </div>
+            </div>
+
+            <!-- Nakládání s vodami -->
+            <div class="reveal bg-cream p-8 flex flex-col" style="border-top:4px solid #657eb4">
+                <div class="flex items-center gap-3 mb-5">
+                    <div class="w-9 h-9 flex items-center justify-center flex-shrink-0" style="background:rgba(101,126,180,.1)">
+                        <svg class="w-5 h-5" style="color:#657eb4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 0c0 0-4 5.5-4 9a4 4 0 008 0c0-3.5-4-9-4-9z"/></svg>
+                    </div>
+                    <h3 class="font-serif text-base font-bold text-navy">Nakládání s vodami / ČOV</h3>
+                </div>
+                <div class="space-y-2 flex-1">
+                    <div class="flex items-start gap-2"><span class="w-1.5 h-1.5 rounded-full bg-gold flex-shrink-0 mt-[7px]" style="background:#657eb4"></span><span class="text-navy/80 text-sm">Metodika a dokumentace pro čistírny odpadních vod</span></div>
+                    <div class="flex items-start gap-2"><span class="w-1.5 h-1.5 rounded-full bg-gold flex-shrink-0 mt-[7px]" style="background:#657eb4"></span><span class="text-navy/80 text-sm">Evidence nakládání s vodami</span></div>
+                    <div class="flex items-start gap-2"><span class="w-1.5 h-1.5 rounded-full bg-gold flex-shrink-0 mt-[7px]" style="background:#657eb4"></span><span class="text-navy/80 text-sm">Havarijní plány pro závadné látky</span></div>
+                    <div class="flex items-start gap-2"><span class="w-1.5 h-1.5 rounded-full bg-gold flex-shrink-0 mt-[7px]" style="background:#657eb4"></span><span class="text-navy/80 text-sm">Kontroly a zápisy z EMS pochůzek po provozu</span></div>
+                    <div class="flex items-start gap-2"><span class="w-1.5 h-1.5 rounded-full bg-gold flex-shrink-0 mt-[7px]" style="background:#657eb4"></span><span class="text-navy/80 text-sm">Ohlašování agendy vod přes ISPOP</span></div>
+                </div>
+            </div>
+
+            <!-- EMS / ISO 14001 -->
+            <div class="reveal bg-cream p-8 flex flex-col" style="border-top:4px solid #F5A300">
+                <div class="flex items-center gap-3 mb-5">
+                    <div class="w-9 h-9 flex items-center justify-center flex-shrink-0" style="background:rgba(245,163,0,.1)">
+                        <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+                    </div>
+                    <h3 class="font-serif text-base font-bold text-navy">EMS / ISO 14001</h3>
+                </div>
+                <div class="space-y-2 flex-1">
+                    <div class="flex items-start gap-2"><span class="w-1.5 h-1.5 rounded-full bg-gold flex-shrink-0 mt-[7px]"></span><span class="text-navy/80 text-sm">Zavedení systému EMS do provozu</span></div>
+                    <div class="flex items-start gap-2"><span class="w-1.5 h-1.5 rounded-full bg-gold flex-shrink-0 mt-[7px]"></span><span class="text-navy/80 text-sm">Environmentální aspekty a jejich hodnocení</span></div>
+                    <div class="flex items-start gap-2"><span class="w-1.5 h-1.5 rounded-full bg-gold flex-shrink-0 mt-[7px]"></span><span class="text-navy/80 text-sm">Registr zákonných požadavků ŽP</span></div>
+                    <div class="flex items-start gap-2"><span class="w-1.5 h-1.5 rounded-full bg-gold flex-shrink-0 mt-[7px]"></span><span class="text-navy/80 text-sm">Interní audity EMS</span></div>
+                    <div class="flex items-start gap-2"><span class="w-1.5 h-1.5 rounded-full bg-gold flex-shrink-0 mt-[7px]"></span><span class="text-navy/80 text-sm">Podpora při přípravě na certifikaci ISO 14001</span></div>
+                </div>
+            </div>
+
+            <!-- Prevence závažných havárií -->
+            <div class="reveal bg-cream p-8 flex flex-col" style="border-top:4px solid #0B1929">
+                <div class="flex items-center gap-3 mb-5">
+                    <div class="w-9 h-9 flex items-center justify-center flex-shrink-0" style="background:rgba(11,25,41,.07)">
+                        <svg class="w-5 h-5 text-navy" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v4m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg>
+                    </div>
+                    <h3 class="font-serif text-base font-bold text-navy">Prevence závažných havárií</h3>
+                </div>
+                <div class="space-y-2 flex-1">
+                    <div class="flex items-start gap-2"><span class="w-1.5 h-1.5 rounded-full bg-navy flex-shrink-0 mt-[7px]"></span><span class="text-navy/80 text-sm">Posouzení protokolu o nezařazení objektu</span></div>
+                    <div class="flex items-start gap-2"><span class="w-1.5 h-1.5 rounded-full bg-navy flex-shrink-0 mt-[7px]"></span><span class="text-navy/80 text-sm">Zpracování havarijní dokumentace</span></div>
+                    <div class="flex items-start gap-2"><span class="w-1.5 h-1.5 rounded-full bg-navy flex-shrink-0 mt-[7px]"></span><span class="text-navy/80 text-sm">Hodnocení rizik ekologické újmy</span></div>
+                    <div class="flex items-start gap-2"><span class="w-1.5 h-1.5 rounded-full bg-navy flex-shrink-0 mt-[7px]"></span><span class="text-navy/80 text-sm">Školení zaměstnanců v oblasti PZH</span></div>
+                    <div class="flex items-start gap-2"><span class="w-1.5 h-1.5 rounded-full bg-navy flex-shrink-0 mt-[7px]"></span><span class="text-navy/80 text-sm">Zastoupení při kontrolách ČIŽP</span></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- ════════════════════════════════════════
+     KDO NAŠE SLUŽBY OCENÍ
+════════════════════════════════════════ -->
+<section class="bg-cream py-20 px-6">
+    <div class="max-w-4xl mx-auto">
+        <div class="reveal mb-10">
+            <p class="text-gold text-xs tracking-[0.35em] uppercase mb-4">Pro koho</p>
+            <h2 class="font-serif text-3xl lg:text-4xl font-bold text-navy mb-4">Kdo naše služby ocení nejvíc</h2>
+            <p class="text-gray-500 text-base leading-relaxed max-w-2xl">
+                Environmentální povinnosti se liší provoz od provozu. Výrobní firma s kotelnou a chemickým skladem má zcela jiné starosti než autoservis nebo potravinářský závod. Pracujeme s firmami z různých odvětví — vždy začínáme analýzou toho, co konkrétně vaše provozovna musí plnit.
+            </p>
+        </div>
+        <div class="reveal grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div class="flex items-center gap-3 bg-white border border-navy/10 px-5 py-4">
+                <div class="w-8 h-8 flex items-center justify-center flex-shrink-0" style="background:rgba(42,122,60,.08)">
+                    <svg class="w-4 h-4" style="color:#2A7A3C" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="1"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>
+                </div>
+                <span class="text-navy text-sm font-medium">Výrobní a průmyslové podniky</span>
+            </div>
+            <div class="flex items-center gap-3 bg-white border border-navy/10 px-5 py-4">
+                <div class="w-8 h-8 flex items-center justify-center flex-shrink-0" style="background:rgba(42,122,60,.08)">
+                    <svg class="w-4 h-4" style="color:#2A7A3C" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/></svg>
+                </div>
+                <span class="text-navy text-sm font-medium">Autoservisy a dopravní firmy</span>
+            </div>
+            <div class="flex items-center gap-3 bg-white border border-navy/10 px-5 py-4">
+                <div class="w-8 h-8 flex items-center justify-center flex-shrink-0" style="background:rgba(42,122,60,.08)">
+                    <svg class="w-4 h-4" style="color:#2A7A3C" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+                </div>
+                <span class="text-navy text-sm font-medium">Strojírenství a zpracovatelé kovů</span>
+            </div>
+            <div class="flex items-center gap-3 bg-white border border-navy/10 px-5 py-4">
+                <div class="w-8 h-8 flex items-center justify-center flex-shrink-0" style="background:rgba(42,122,60,.08)">
+                    <svg class="w-4 h-4" style="color:#2A7A3C" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+                </div>
+                <span class="text-navy text-sm font-medium">Sklady a logistická centra</span>
+            </div>
+            <div class="flex items-center gap-3 bg-white border border-navy/10 px-5 py-4">
+                <div class="w-8 h-8 flex items-center justify-center flex-shrink-0" style="background:rgba(42,122,60,.08)">
+                    <svg class="w-4 h-4" style="color:#2A7A3C" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                </div>
+                <span class="text-navy text-sm font-medium">Potravinářství a zemědělství</span>
+            </div>
+            <div class="flex items-center gap-3 bg-white border border-navy/10 px-5 py-4">
+                <div class="w-8 h-8 flex items-center justify-center flex-shrink-0" style="background:rgba(42,122,60,.08)">
+                    <svg class="w-4 h-4" style="color:#2A7A3C" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 3h6m-6 0a1 1 0 00-1 1v4.586a1 1 0 01-.293.707L4.293 12.707A1 1 0 004 13.414V19a2 2 0 002 2h12a2 2 0 002-2v-5.586a1 1 0 00-.293-.707L16.293 9.293A1 1 0 0116 8.586V4a1 1 0 00-1-1m-6 0h6"/></svg>
+                </div>
+                <span class="text-navy text-sm font-medium">Firmy nakládající s chemickými látkami</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ════════════════════════════════════════
+     JAK SPOLUPRÁCE PROBÍHÁ
+════════════════════════════════════════ -->
+<section class="py-24 px-6 relative overflow-hidden" style="background:#0B1929">
+    <img src="img./vetrna-el.avif" alt="" aria-hidden="true" class="absolute inset-0 w-full h-full object-cover object-center">
+    <div class="absolute inset-0" style="background:rgba(11,25,41,0.68)"></div>
+    <div class="max-w-6xl mx-auto relative z-10">
+
+        <div class="reveal mb-14">
+            <p class="text-gold text-xs tracking-[0.35em] uppercase mb-4">Postup</p>
+            <h2 class="font-serif text-3xl lg:text-4xl font-bold text-white mb-4">Jak spolupráce probíhá</h2>
+            <p class="text-white/60 text-base max-w-lg">Začínáme vždy analýzou — ne šablonou. Co vaše firma musí plnit, závisí na tom, co konkrétně dělá.</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+
+            <div class="reveal bg-white/5 border border-white/10 p-8 flex flex-col hover:border-gold/40 transition">
+                <div class="step-number mb-2">1</div>
+                <h3 class="font-serif text-base font-bold text-white mb-2">Analýza povinností</h3>
+                <p class="text-white/60 text-sm leading-relaxed flex-1">Projdeme vaši provozovnu a zjistíme, které složky environmentální legislativy se na vás vztahují. Výsledkem je jasný přehled — co plníte, co chybí a co je třeba nastavit.</p>
+            </div>
+
+            <div class="reveal bg-white/5 border border-white/10 p-8 flex flex-col hover:border-gold/40 transition">
+                <div class="step-number mb-2">2</div>
+                <h3 class="font-serif text-base font-bold text-white mb-2">Nastavení systému a dokumentace</h3>
+                <p class="text-white/60 text-sm leading-relaxed flex-1">Zpracujeme potřebnou dokumentaci: provozní řády, havarijní plány, písemná pravidla pro chemické látky, evidenci odpadů. Vše na míru vašemu provozu a aktuální legislativě.</p>
+            </div>
+
+            <div class="reveal bg-white/5 border border-white/10 p-8 flex flex-col hover:border-gold/40 transition">
+                <div class="step-number mb-2">3</div>
+                <h3 class="font-serif text-base font-bold text-white mb-2">Průběžná správa a hlášení</h3>
+                <p class="text-white/60 text-sm leading-relaxed flex-1">Hlídáme termíny, vedeme průběžnou evidenci odpadů, zpracováváme roční hlášení přes ISPOP a informujeme vás o každé změně legislativy, která se vás týká. Žádné překvapení ze zákonodárce.</p>
+            </div>
+
+            <div class="reveal bg-white/5 border border-white/10 p-8 flex flex-col hover:border-gold/40 transition">
+                <div class="step-number mb-2">4</div>
+                <h3 class="font-serif text-base font-bold text-white mb-2">Kontroly a zastoupení</h3>
+                <p class="text-white/60 text-sm leading-relaxed flex-1">Provádíme pravidelné EMS pochůzky a interní audity. Přijde-li Česká inspekce životního prostředí, zastoupíme vás při jednání a obhájíme nastavený systém. Nejste na to sami.</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- ════════════════════════════════════════
+     FAQ
+════════════════════════════════════════ -->
+<section class="bg-white py-24 px-6">
+    <div class="max-w-3xl mx-auto">
+
+        <div class="text-center mb-14 reveal">
+            <p class="text-gold text-xs tracking-[0.35em] uppercase mb-4">Dotazy</p>
+            <h2 class="font-serif text-3xl lg:text-4xl font-bold text-navy">Nejčastější otázky o EMS a ochraně životního prostředí</h2>
+        </div>
+
+        <div class="space-y-3">
+
+            <div class="faq-item reveal">
+                <button class="faq-trigger" aria-expanded="false">
+                    Musí mít každá firma podnikového ekologa nebo EMS?
+                    <svg class="faq-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+                </button>
+                <div class="faq-body-grid"><div>
+                    <p class="faq-body">Ze zákona není povinný titul "podnikový ekolog" ani certifikace EMS. Povinné jsou ale konkrétní agendy, které z různých zákonů vyplývají. Každý původce odpadu musí vést evidenci a podávat hlášení. Každý, kdo nakládá s nebezpečnými chemickými látkami, musí mít zpracovaná písemná pravidla. Každý, kdo provozuje zdroj znečišťování ovzduší, musí vést provozní evidenci. Kdo tedy tyto povinnosti plní, de facto EMS provádí — jen mu to nikdo tak nenazval. Otázkou je pouze to, zda to dělá systematicky a správně.</p>
+                </div></div>
+            </div>
+
+            <div class="faq-item reveal">
+                <button class="faq-trigger" aria-expanded="false">
+                    Jak se liší EMS od certifikace ISO 14001?
+                    <svg class="faq-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+                </button>
+                <div class="faq-body-grid"><div>
+                    <p class="faq-body">ISO 14001 je mezinárodní norma, která stanovuje požadavky na systém environmentálního managementu. Certifikace podle ní je dobrovolná, ale dává firmě "papír", že její EMS odpovídá konkrétnímu standardu — což ocení zejména zákazníci a obchodní partneři. EMS jako takový ale můžete mít nastavený i bez certifikace. Pomáháme oběma variantám — jak základnímu nastavení systému plnění zákonných povinností, tak přípravě na certifikaci ISO 14001, pokud o ni máte zájem.</p>
+                </div></div>
+            </div>
+
+            <div class="faq-item reveal">
+                <button class="faq-trigger" aria-expanded="false">
+                    Co je ISPOP a musíme přes něj něco hlásit?
+                    <svg class="faq-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+                </button>
+                <div class="faq-body-grid"><div>
+                    <p class="faq-body">ISPOP je Integrovaný systém plnění ohlašovacích povinností v oblasti životního prostředí — online portál Ministerstva životního prostředí. Přes něj firmy každoročně ohlašují nakládání s odpady, emise do ovzduší, nakládání s vodami a další agendy. Pokud vaše firma produkuje odpady (a to dělá prakticky každá), ohlašovací povinnost přes ISPOP s vysokou pravděpodobností máte. Termín podání ročního hlášení o odpadech je každý rok do 28. února. Hlídáme termíny a podáváme hlášení za vás.</p>
+                </div></div>
+            </div>
+
+            <div class="faq-item reveal">
+                <button class="faq-trigger" aria-expanded="false">
+                    Co hrozí, když odpadové hospodářství nebo chemické látky neřešíme?
+                    <svg class="faq-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+                </button>
+                <div class="faq-body-grid"><div>
+                    <p class="faq-body">Česká inspekce životního prostředí (ČIŽP) provádí kontroly bez předchozího upozornění a ukládá pokuty za porušení environmentální legislativy. Sankce se liší podle závažnosti — za neplnění povinností v odpadovém hospodářství může pokuta dosáhnout stovek tisíc korun, u závažnějších porušení i více. Navíc chybějící nebo neaktuální dokumentace může způsobit komplikace při pojistném plnění v případě havárie nebo ekologické újmy. Prevence je vždy levnější než následné řešení problémů.</p>
+                </div></div>
+            </div>
+
+            <div class="faq-item reveal">
+                <button class="faq-trigger" aria-expanded="false">
+                    Co je havarijní plán a kdy ho musíme mít?
+                    <svg class="faq-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+                </button>
+                <div class="faq-body-grid"><div>
+                    <p class="faq-body">Havarijní plán řeší, co dělat v případě úniku závadné látky — ropy, chemikálií nebo jiných látek, které mohou ohrozit vody nebo půdu. Povinnost zpracovat havarijní plán vzniká při nakládání se závadnými látkami nad určité množství nebo při provozování zařízení, kde k úniku může dojít. Každý havarijní plán musí být zpracován individuálně — zohledňuje konkrétní lokalitu, hydrologické poměry i složení nakládaných látek. Pomůžeme vám zjistit, zda vaše firma havarijní plán potřebuje, a pokud ano, připravíme ho.</p>
+                </div></div>
+            </div>
+
+            <div class="faq-item reveal">
+                <button class="faq-trigger" aria-expanded="false">
+                    Zajišťujete i metodiku a dokumentaci pro čistírnu odpadních vod?
+                    <svg class="faq-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+                </button>
+                <div class="faq-body-grid"><div>
+                    <p class="faq-body">Ano. ČOV (čistírna odpadních vod) vyžaduje provozní dokumentaci, metodiku pro obsluhu a pravidelné záznamy. Pokud máte vlastní ČOV nebo vypouštíte odpadní vody do kanalizace nebo recipientu, váží se k tomu konkrétní povinnosti z vodního zákona. Zpracujeme potřebnou metodiku a dokumentaci, nastavíme systém záznamů a budeme průběžně dohlížet na plnění podmínek vodoprávního povolení nebo smlouvy se správcem kanalizace.</p>
+                </div></div>
+            </div>
+
+            <div class="faq-item reveal">
+                <button class="faq-trigger" aria-expanded="false">
+                    Jak se liší zákonné povinnosti pro malou a velkou firmu?
+                    <svg class="faq-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+                </button>
+                <div class="faq-body-grid"><div>
+                    <p class="faq-body">Zákonné povinnosti se neodvíjí od velikosti firmy ani počtu zaměstnanců, ale od toho, co konkrétně firma dělá — jaké odpady produkuje, zda nakládá s chemickými látkami, zda provozuje zdroje znečišťování ovzduší nebo vypouští vody. Živnostník s dílnou může mít stejně rozsáhlé povinnosti jako střední firma s administrativou. Proto vždy začínáme analýzou konkrétního provozu — ne šablonou.</p>
+                </div></div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- ════════════════════════════════════════
+     CTA
 ════════════════════════════════════════ -->
 <section class="py-24 px-6 relative overflow-hidden" style="background:#657eb4">
     <div class="absolute inset-0 opacity-[0.04]"
-         style="background-image:linear-gradient(rgba(245,163,0,1) 1px,transparent 1px),linear-gradient(90deg,rgba(245,163,0,1) 1px,transparent 1px);background-size:48px 48px">
-    </div>
+         style="background-image:linear-gradient(rgba(245,163,0,1) 1px,transparent 1px),linear-gradient(90deg,rgba(245,163,0,1) 1px,transparent 1px);background-size:48px 48px"></div>
     <div class="absolute right-0 top-0 w-1/2 h-full opacity-5">
-        <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
-            <path d="M200 20L20 110V220c0 110 80 213 180 240C300 433 380 330 380 220V110L200 20z" fill="#F5A300"/>
-        </svg>
+        <svg viewBox="0 0 400 400" fill="none" class="w-full h-full"><path d="M200 20L20 110V220c0 110 80 213 180 240C300 433 380 330 380 220V110L200 20z" fill="#F5A300"/></svg>
     </div>
-    <div class="max-w-4xl mx-auto text-center relative z-10 reveal">
-        <p class="text-gold text-xs tracking-[0.3em] uppercase mb-6">Spolupráce</p>
-        <h2 class="font-serif text-4xl lg:text-6xl font-bold text-white mb-8 leading-tight">
-            Nabízíme možnost<br>obchodní spolupráce.
+    <div class="max-w-3xl mx-auto text-center relative z-10 reveal">
+        <p class="text-gold text-xs tracking-[0.35em] uppercase mb-6">Analýza zdarma</p>
+        <h2 class="font-serif text-3xl lg:text-5xl font-bold text-white mb-6 leading-tight">
+            Nevíte, co přesně vaše firma<br>musí v oblasti ŽP plnit?
         </h2>
-        <p class="text-white/75 text-lg leading-relaxed max-w-2xl mx-auto mb-12">
-            Ať jste malá živnost nebo velký průmyslový podnik — máme řešení pro každého. Ozvěte se nám pro bezplatnou konzultaci.
+        <p class="text-white/70 text-base leading-relaxed max-w-xl mx-auto mb-10">
+            Provedeme bezplatnou analýzu a řekneme vám přesně, kde stojíte a co je potřeba nastavit.
         </p>
-        <a href="index.html#kontakt" class="inline-block bg-gold hover:bg-gold-l text-white px-14 py-5 text-xs tracking-[0.3em] uppercase transition font-semibold">
-            Kontaktujte nás
+        <a href="index.html#kontakt" class="inline-block bg-gold hover:bg-gold-l text-white px-12 py-5 text-xs tracking-[0.3em] uppercase transition font-semibold">
+            Chci analýzu zdarma
         </a>
     </div>
 </section>
@@ -250,60 +635,45 @@
 ════════════════════════════════════════ -->
 <footer class="bg-gold pt-16 pb-8 px-6">
     <div class="max-w-7xl mx-auto">
-
         <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-10 pb-14 border-b border-black/10">
-
-            <!-- Brand -->
             <div class="lg:col-span-1">
                 <a href="index.html" class="flex items-center mb-6">
                     <img src="img./logo-full-navy.png" alt="Správa BOZP s.r.o." class="h-9 w-auto">
                 </a>
-                <p class="text-navy/75 text-sm leading-relaxed">
-                    Specialisté na bezpečnost práce a požární ochranu. Komplexní outsourcing BOZP pro podniky všech velikostí.
-                </p>
+                <p class="text-navy/75 text-sm leading-relaxed">Specialisté na bezpečnost práce a požární ochranu. Komplexní outsourcing BOZP pro podniky všech velikostí.</p>
             </div>
-
-            <!-- Services -->
             <div>
                 <h4 class="text-navy text-[10px] font-bold uppercase tracking-[0.25em] mb-6">Služby</h4>
                 <ul class="space-y-3">
-                    <li><a href="bozp.html" class="text-navy/70 text-sm hover:text-navy transition">BOZP</a></li>
-                    <li><a href="pozarni-ochrana.html" class="text-navy/70 text-sm hover:text-navy transition">Požární ochrana</a></li>
+                    <li><a href="bozp.html"                  class="text-navy/70 text-sm hover:text-navy transition">BOZP</a></li>
+                    <li><a href="pozarni-ochrana.html"       class="text-navy/70 text-sm hover:text-navy transition">Požární ochrana</a></li>
                     <li><a href="zivotni-prostredi-ems.html" class="text-navy/70 text-sm hover:text-navy transition">Životní prostředí - EMS</a></li>
-                    <li><a href="obce.html" class="text-navy/70 text-sm hover:text-navy transition">Obce</a></li>
-                    <li><a href="slovnicek-pojmu.html" class="text-navy/70 text-sm hover:text-navy transition">Slovníček pojmů</a></li>
+                    <li><a href="obce.html"                  class="text-navy/70 text-sm hover:text-navy transition">Obce</a></li>
+                    <li><a href="slovnicek-pojmu.html"       class="text-navy/70 text-sm hover:text-navy transition">Slovníček pojmů</a></li>
                 </ul>
             </div>
-
-            <!-- Company -->
             <div>
                 <h4 class="text-navy text-[10px] font-bold uppercase tracking-[0.25em] mb-6">Společnost</h4>
                 <ul class="space-y-3">
-                    <li><a href="index.html#o-nas"  class="text-navy/70 text-sm hover:text-navy transition">O nás</a></li>
-                    <li><a href="partneri.html"     class="text-navy/70 text-sm hover:text-navy transition">Partneři</a></li>
+                    <li><a href="o-nas.html"   class="text-navy/70 text-sm hover:text-navy transition">O nás</a></li>
+                    <li><a href="partneri.html"      class="text-navy/70 text-sm hover:text-navy transition">Partneři</a></li>
                     <li><a href="index.html#kontakt" class="text-navy/70 text-sm hover:text-navy transition">Kontakt</a></li>
-                    <li><a href="#"                 class="text-navy/70 text-sm hover:text-navy transition">Ochrana osobních údajů</a></li>
+                    <li><a href="#"                  class="text-navy/70 text-sm hover:text-navy transition">Ochrana osobních údajů</a></li>
                 </ul>
             </div>
-
-            <!-- Contact -->
             <div>
                 <h4 class="text-navy text-[10px] font-bold uppercase tracking-[0.25em] mb-6">Kontakt</h4>
                 <address class="not-italic space-y-3 text-navy/70 text-sm">
                     <p>Zemědělská 1145/4a<br>Slezské Předměstí<br>500 03 Hradec Králové</p>
-                    <a href="tel:+420737517995"          class="block hover:text-navy transition font-medium">+420 737 517 995</a>
+                    <a href="tel:+420737517995"           class="block hover:text-navy transition font-medium">+420 737 517 995</a>
                     <a href="mailto:asistentka@spravaBOZP.cz" class="block hover:text-navy transition break-all">asistentka@spravaBOZP.cz</a>
                 </address>
             </div>
-
         </div>
-
-        <!-- Bottom bar -->
         <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
             <p class="text-navy/60 text-xs">© 2024 Správa BOZP s.r.o. Všechna práva vyhrazena.</p>
             <a href="#" class="text-navy/60 text-xs hover:text-navy transition">Prohlášení o zásadách ochrany osobních údajů</a>
         </div>
-
     </div>
 </footer>
 
@@ -312,15 +682,14 @@
      JAVASCRIPT
 ════════════════════════════════════════ -->
 <script>
-    // ── Navbar scroll + mobile menu open both trigger the navy "scrolled" look ──
     const nav = document.getElementById('navbar');
     const mobMenu = document.getElementById('mob-menu');
     function updateNavState() {
         nav.classList.toggle('scrolled', window.scrollY > 60 || mobMenu.classList.contains('open'));
     }
     window.addEventListener('scroll', updateNavState, { passive: true });
+    updateNavState();
 
-    // ── Mobile menu ──
     const ham = document.getElementById('ham');
     ham.addEventListener('click', () => {
         mobMenu.classList.toggle('open');
@@ -328,7 +697,6 @@
         updateNavState();
     });
 
-    // ── Mobile accordion dropdowns ──
     ['sluzby', 'spolecnost'].forEach(key => {
         const btn   = document.getElementById('mob-' + key + '-btn');
         const panel = document.getElementById('mob-' + key);
@@ -338,15 +706,9 @@
             const isOpen = panel.style.maxHeight && panel.style.maxHeight !== '0px';
             panel.style.maxHeight = isOpen ? '0px' : panel.scrollHeight + 'px';
             icon.style.transform  = isOpen ? '' : 'rotate(180deg)';
-            if (!isOpen) {
-                const outer = document.getElementById('mob-menu');
-                const inner = outer.querySelector('.bg-white');
-                outer.style.maxHeight = Math.max(600, inner.scrollHeight + 16) + 'px';
-            }
         });
     });
 
-    // ── Smooth scroll + close mob menu on in-page link click ──
     document.querySelectorAll('a[href^="#"]').forEach(a => {
         a.addEventListener('click', e => {
             const id = a.getAttribute('href');
@@ -354,12 +716,9 @@
             e.preventDefault();
             const el = document.querySelector(id);
             if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            mobMenu.classList.remove('open');
-            updateNavState();
         });
     });
 
-    // ── Reveal on scroll ──
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -367,13 +726,38 @@
                 observer.unobserve(entry.target);
             }
         });
-    }, { threshold: 0.12 });
-
+    }, { threshold: 0.1 });
     document.querySelectorAll('.reveal').forEach((el, i) => {
         el.style.transitionDelay = (i % 4) * 0.08 + 's';
         observer.observe(el);
     });
+
+    (function(){
+        var c = document.getElementById('infoCard');
+        if(!c) return;
+        function toggle(){ var o = c.getAttribute('aria-expanded')==='true'; c.setAttribute('aria-expanded', String(!o)); }
+        c.addEventListener('click', toggle);
+        c.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); toggle(); } });
+    })();
+
+    (function(){
+        document.querySelectorAll('.faq-trigger').forEach(function(btn){
+            btn.addEventListener('click', function(){
+                var item = btn.closest('.faq-item');
+                var isOpen = item.classList.contains('is-open');
+                document.querySelectorAll('.faq-item').forEach(function(i){
+                    i.classList.remove('is-open');
+                    i.querySelector('.faq-trigger').setAttribute('aria-expanded','false');
+                });
+                if(!isOpen){
+                    item.classList.add('is-open');
+                    btn.setAttribute('aria-expanded','true');
+                }
+            });
+        });
+    })();
 </script>
 
+<script src="popup.js" defer></script>
 </body>
 </html>

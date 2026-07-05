@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BOZP — Správa BOZP s.r.o.</title>
+    <title>BOZP — Bezpečnost a ochrana zdraví při práci | Správa BOZP s.r.o.</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -27,12 +27,12 @@
         }
     </script>
     <style>
-        @font-face { font-family:'Poppins'; src:url('Poppins/Poppins-Regular.ttf')          format('truetype'); font-weight:400; font-style:normal; font-display:swap; }
-        @font-face { font-family:'Poppins'; src:url('Poppins/Poppins-Italic.ttf')           format('truetype'); font-weight:400; font-style:italic; font-display:swap; }
-        @font-face { font-family:'Poppins'; src:url('Poppins/Poppins-Medium.ttf')           format('truetype'); font-weight:500; font-style:normal; font-display:swap; }
-        @font-face { font-family:'Poppins'; src:url('Poppins/Poppins-SemiBold.ttf')         format('truetype'); font-weight:600; font-style:normal; font-display:swap; }
-        @font-face { font-family:'Poppins'; src:url('Poppins/Poppins-Bold.ttf')             format('truetype'); font-weight:700; font-style:normal; font-display:swap; }
-        @font-face { font-family:'Poppins'; src:url('Poppins/Poppins-BoldItalic.ttf')       format('truetype'); font-weight:700; font-style:italic; font-display:swap; }
+        @font-face { font-family:'Poppins'; src:url('Poppins/Poppins-Regular.ttf')    format('truetype'); font-weight:400; font-style:normal;  font-display:swap; }
+        @font-face { font-family:'Poppins'; src:url('Poppins/Poppins-Italic.ttf')     format('truetype'); font-weight:400; font-style:italic;  font-display:swap; }
+        @font-face { font-family:'Poppins'; src:url('Poppins/Poppins-Medium.ttf')     format('truetype'); font-weight:500; font-style:normal;  font-display:swap; }
+        @font-face { font-family:'Poppins'; src:url('Poppins/Poppins-SemiBold.ttf')   format('truetype'); font-weight:600; font-style:normal;  font-display:swap; }
+        @font-face { font-family:'Poppins'; src:url('Poppins/Poppins-Bold.ttf')       format('truetype'); font-weight:700; font-style:normal;  font-display:swap; }
+        @font-face { font-family:'Poppins'; src:url('Poppins/Poppins-BoldItalic.ttf') format('truetype'); font-weight:700; font-style:italic;  font-display:swap; }
 
         *, *::before, *::after { box-sizing: border-box; }
         body { font-family: 'Poppins', sans-serif; }
@@ -41,7 +41,6 @@
         /* ── Navbar ── */
         #navbar { transition: padding 0.3s, box-shadow 0.3s; }
         #navbar.scrolled { box-shadow: 0 2px 24px rgba(0,0,0,.12); }
-
         .nav-bg-white  { position:absolute; inset:0; background:#fff; clip-path: polygon(0 0,71% 0,65% 100%,0 100%); z-index:0; }
         .nav-bg-accent { position:absolute; inset:0; background:transparent; clip-path: polygon(71% 0,100% 0,100% 100%,65% 100%); z-index:0; pointer-events:none; transition: background .3s; }
         #navbar.scrolled .nav-bg-accent { background: #657eb4; }
@@ -54,11 +53,60 @@
         #mob-menu { position:absolute; top:100%; right:0; width:50%; min-width:260px; max-height:0; overflow:hidden; transition:max-height .35s ease; }
         #mob-menu.open { max-height:600px; }
 
-        /* ── Hamburger animation ── */
+        /* ── Hamburger ── */
         .ham-line { display:block; width:22px; height:2px; background:currentColor; border-radius:2px; transition:transform .3s ease, opacity .3s ease; }
         #ham.open .ham-line:nth-child(1) { transform:translateY(8px) rotate(45deg); }
         #ham.open .ham-line:nth-child(2) { opacity:0; transform:scaleX(0); }
         #ham.open .ham-line:nth-child(3) { transform:translateY(-8px) rotate(-45deg); }
+
+        /* ── Service cards (why outsourcing) ── */
+        .benefit-card { transition: transform .35s ease, box-shadow .35s ease; box-shadow: 0 2px 16px rgba(11,25,41,.07); }
+        .benefit-card:hover { transform: translateY(-6px); box-shadow: 0 20px 48px rgba(11,25,41,.12); }
+
+        /* ── Process steps ── */
+        .step-number { font-size: 5rem; font-weight: 700; line-height: 1; color: rgba(245,163,0,.18); font-family: 'Poppins', sans-serif; }
+
+        /* ── FAQ accordion ── */
+        .faq-item { background:#fff; border:1px solid rgba(11,25,41,.10); transition:border-color .25s ease, box-shadow .25s ease; }
+        .faq-item.is-open { border-color:#F5A300; box-shadow:0 4px 24px rgba(245,163,0,.10); }
+        .faq-trigger { display:flex; align-items:center; justify-content:space-between; gap:16px; width:100%; padding:24px; background:transparent; border:none; cursor:pointer; text-align:left; font-family:'Poppins',sans-serif; font-size:1rem; font-weight:700; color:#0B1929; }
+        .faq-trigger:focus-visible { outline:2px solid #F5A300; outline-offset:2px; }
+        .faq-icon { width:20px; height:20px; color:#F5A300; flex-shrink:0; transition:transform .35s cubic-bezier(.4,0,.2,1); }
+        .faq-item.is-open .faq-icon { transform:rotate(45deg); }
+        .faq-body-grid { display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s cubic-bezier(.4,0,.2,1); }
+        .faq-item.is-open .faq-body-grid { grid-template-rows:1fr; }
+        .faq-body-grid > div { overflow:hidden; }
+        .faq-body { padding:0 24px 24px; font-size:.875rem; line-height:1.85; color:#6b7280; }
+
+        @media (prefers-reduced-motion:reduce) {
+            .faq-body-grid, .faq-icon, .benefit-card { transition:none; }
+        }
+
+        /* ── Info card (hero) ── */
+        .info-card-wrap { position:relative; padding-top:24px; padding-left:20px; max-width:32rem; margin-top:2rem; }
+        .info-chip { position:absolute; top:0; left:0; width:52px; height:52px; background:#F5A300; display:flex; align-items:center; justify-content:center; z-index:10; box-shadow:0 4px 16px rgba(0,0,0,.35); }
+        .info-chip span { font-size:1.9rem; font-weight:900; color:#fff; line-height:1; font-family:Georgia,serif; user-select:none; }
+        .info-card { background:#f7f4ee; border-top:3px solid #F5A300; box-shadow:0 8px 32px rgba(0,0,0,.32); cursor:pointer; outline:none; -webkit-tap-highlight-color:transparent; }
+        .info-card:focus-visible { outline:2px solid #F5A300; outline-offset:3px; }
+        .info-card__header { display:flex; align-items:center; gap:16px; padding:20px 20px 18px 36px; }
+        .info-card__meta { flex:1; min-width:0; }
+        .info-card__ref { display:block; font-size:10px; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:#F5A300; margin-bottom:3px; }
+        .info-card__title { display:block; font-size:13.5px; font-weight:700; color:#0B1929; line-height:1.3; }
+        .info-card__chevron { width:32px; height:32px; border-radius:50%; background:#F5A300; display:flex; align-items:center; justify-content:center; flex-shrink:0; transition:background .2s ease; }
+        .info-card__chevron svg { transition:transform .35s cubic-bezier(.4,0,.2,1); }
+        .info-card[aria-expanded="true"] .info-card__chevron svg { transform:rotate(180deg); }
+        .info-divider-grid { display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s cubic-bezier(.4,0,.2,1); }
+        .info-card[aria-expanded="true"] .info-divider-grid { grid-template-rows:1fr; }
+        .info-divider-grid > div { overflow:hidden; }
+        .info-divider-line { height:1px; background:rgba(245,163,0,.22); margin:0 20px 0 36px; }
+        .info-body-grid { display:grid; grid-template-rows:0fr; transition:grid-template-rows .5s cubic-bezier(.4,0,.2,1); }
+        .info-card[aria-expanded="true"] .info-body-grid { grid-template-rows:1fr; }
+        .info-body-grid > div { overflow:hidden; }
+        .info-body { padding:16px 20px 24px 36px; }
+        .info-body p { font-size:13.5px; line-height:1.8; color:#374151; font-weight:400; }
+        .info-footnote { display:flex; align-items:center; gap:8px; margin-top:14px; padding-top:14px; border-top:1px solid rgba(245,163,0,.15); }
+        .info-footnote-dot { width:6px; height:6px; background:#F5A300; border-radius:50%; flex-shrink:0; }
+        .info-footnote-text { font-size:11px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:#F5A300; }
     </style>
 </head>
 <body class="bg-white text-gray-800 antialiased">
@@ -66,89 +114,71 @@
 <!-- ════════════════════════════════════════
      NAVIGATION
 ════════════════════════════════════════ -->
-<nav id="navbar" class="fixed top-0 inset-x-0 z-50 scrolled">
+<nav id="navbar" class="fixed top-0 inset-x-0 z-50">
     <div class="relative py-5 px-6 lg:px-12">
     <div class="nav-bg-white"></div>
     <div class="nav-bg-accent"></div>
     <div class="relative z-10 max-w-7xl mx-auto flex items-center justify-between">
 
-        <!-- Logo -->
         <a href="index.html" class="flex items-center group">
             <img src="img./logo-full.avif" alt="Správa BOZP s.r.o." class="h-9 w-auto">
         </a>
 
-        <!-- Desktop links -->
         <div class="hidden lg:flex items-center gap-10">
-            <a href="index.html#domu"    class="text-navy/70 hover:text-navy text-xs tracking-[0.15em] uppercase transition">Domů</a>
+            <a href="index.html#domu" class="text-navy/70 hover:text-navy text-xs tracking-[0.15em] uppercase transition">Domů</a>
 
-            <!-- Služby dropdown -->
             <div class="relative group">
-                <span class="flex items-center gap-1 cursor-pointer text-navy group-hover:text-navy text-xs tracking-[0.15em] uppercase transition">
+                <span class="flex items-center gap-1 cursor-pointer text-navy text-xs tracking-[0.15em] uppercase transition">
                     Služby
-                    <svg class="w-3 h-3 transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
-                    </svg>
+                    <svg class="w-3 h-3 transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
                 </span>
                 <div class="absolute left-1/2 -translate-x-1/2 top-full pt-3 opacity-0 invisible translate-y-1 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-200 z-20">
                     <div class="bg-white shadow-lg border border-gray-100 py-2 min-w-[220px]">
-                        <a href="bozp.html"                 class="block px-5 py-2.5 text-navy hover:bg-gray-50 text-xs tracking-[0.1em] uppercase transition whitespace-nowrap">BOZP</a>
-                        <a href="pozarni-ochrana.html"      class="block px-5 py-2.5 text-navy/70 hover:text-navy hover:bg-gray-50 text-xs tracking-[0.1em] uppercase transition whitespace-nowrap">Požární ochrana</a>
+                        <a href="bozp.html"                  class="block px-5 py-2.5 text-navy hover:bg-gray-50 text-xs tracking-[0.1em] uppercase transition whitespace-nowrap">BOZP</a>
+                        <a href="pozarni-ochrana.html"       class="block px-5 py-2.5 text-navy/70 hover:text-navy hover:bg-gray-50 text-xs tracking-[0.1em] uppercase transition whitespace-nowrap">Požární ochrana</a>
                         <a href="zivotni-prostredi-ems.html" class="block px-5 py-2.5 text-navy/70 hover:text-navy hover:bg-gray-50 text-xs tracking-[0.1em] uppercase transition whitespace-nowrap">Životní prostředí - EMS</a>
-                        <a href="obce.html"                 class="block px-5 py-2.5 text-navy/70 hover:text-navy hover:bg-gray-50 text-xs tracking-[0.1em] uppercase transition whitespace-nowrap">Obce</a>
-                        <a href="slovnicek-pojmu.html"      class="block px-5 py-2.5 text-navy/70 hover:text-navy hover:bg-gray-50 text-xs tracking-[0.1em] uppercase transition whitespace-nowrap">Slovníček pojmů</a>
+                        <a href="obce.html"                  class="block px-5 py-2.5 text-navy/70 hover:text-navy hover:bg-gray-50 text-xs tracking-[0.1em] uppercase transition whitespace-nowrap">Obce</a>
+                        <a href="slovnicek-pojmu.html"       class="block px-5 py-2.5 text-navy/70 hover:text-navy hover:bg-gray-50 text-xs tracking-[0.1em] uppercase transition whitespace-nowrap">Slovníček pojmů</a>
                     </div>
                 </div>
             </div>
 
             <a href="partneri.html" class="text-navy/70 hover:text-navy text-xs tracking-[0.15em] uppercase transition">Partneři</a>
 
-            <!-- Společnost dropdown -->
             <div class="relative group">
                 <span class="flex items-center gap-1 cursor-pointer text-navy/70 group-hover:text-navy text-xs tracking-[0.15em] uppercase transition">
                     Společnost
-                    <svg class="w-3 h-3 transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
-                    </svg>
+                    <svg class="w-3 h-3 transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
                 </span>
                 <div class="absolute left-1/2 -translate-x-1/2 top-full pt-3 opacity-0 invisible translate-y-1 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-200 z-20">
                     <div class="bg-white shadow-lg border border-gray-100 py-2 min-w-[160px]">
-                        <a href="index.html#o-nas"   class="block px-5 py-2.5 text-navy/70 hover:text-navy hover:bg-gray-50 text-xs tracking-[0.1em] uppercase transition">O nás</a>
+                        <a href="o-nas.html"   class="block px-5 py-2.5 text-navy/70 hover:text-navy hover:bg-gray-50 text-xs tracking-[0.1em] uppercase transition">O nás</a>
                         <a href="index.html#kontakt" class="block px-5 py-2.5 text-navy/70 hover:text-navy hover:bg-gray-50 text-xs tracking-[0.1em] uppercase transition">Kontakt</a>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- CTA -->
         <a href="index.html#kontakt" class="hidden lg:inline-block bg-gold hover:bg-gold-l text-white text-xs px-6 py-3 tracking-[0.2em] uppercase transition font-medium">
             Kontaktujte nás
         </a>
 
-        <!-- Email icon (mobile/tablet only) -->
         <div class="lg:hidden flex items-center gap-2">
-        <a href="mailto:asistentka@spravaBOZP.cz" class="flex items-center justify-center w-9 h-9 rounded-full bg-gold flex-shrink-0" aria-label="E-mail">
-            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                <line x1="22" y1="2" x2="11" y2="13"/>
-                <polygon points="22 2 15 22 11 13 2 9 22 2"/>
-            </svg>
-        </a>
-                <!-- Hamburger -->
-        <button id="ham" class="text-white p-2 flex flex-col gap-1.5" aria-label="Menu">
+            <a href="mailto:asistentka@spravaBOZP.cz" class="flex items-center justify-center w-9 h-9 rounded-full bg-gold flex-shrink-0" aria-label="E-mail">
+                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            </a>
+            <button id="ham" class="text-white p-2 flex flex-col gap-1.5" aria-label="Menu">
                 <span class="ham-line"></span>
                 <span class="ham-line"></span>
                 <span class="ham-line"></span>
             </button>
         </div>
-        </div>
     </div>
     </div>
 
-    <!-- Mobile menu -->
     <div id="mob-menu" class="lg:hidden overflow-hidden">
         <div class="w-full shadow-xl px-6 py-2" style="background:#657eb4;border-top:1px solid rgba(255,255,255,.15)">
             <a href="index.html#domu" class="flex items-center whitespace-nowrap text-white/80 hover:text-white py-3 text-sm font-medium transition border-b border-white/10">Domů</a>
-
-            <!-- Služby accordion -->
             <div class="border-b border-white/10">
                 <button id="mob-sluzby-btn" class="flex items-center justify-between w-full text-white/80 hover:text-white py-3 text-sm font-medium transition">
                     <span>Služby</span>
@@ -163,84 +193,322 @@
                     <div class="pb-2"></div>
                 </div>
             </div>
-
             <a href="partneri.html" class="flex items-center whitespace-nowrap text-white/80 hover:text-white py-3 text-sm font-medium transition border-b border-white/10">Partneři</a>
-
-            <!-- Společnost accordion -->
             <div class="border-b border-white/10">
                 <button id="mob-spolecnost-btn" class="flex items-center justify-between w-full text-white/80 hover:text-white py-3 text-sm font-medium transition">
                     <span>Společnost</span>
                     <svg id="mob-spolecnost-icon" class="w-3.5 h-3.5 transition-transform duration-200 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
                 </button>
                 <div id="mob-spolecnost" class="overflow-hidden" style="max-height:0;transition:max-height .3s ease">
-                    <a href="index.html#o-nas"   class="block text-white/70 hover:text-white py-2 pl-4 text-sm transition">O nás</a>
+                    <a href="o-nas.html"   class="block text-white/70 hover:text-white py-2 pl-4 text-sm transition">O nás</a>
                     <a href="index.html#kontakt" class="block text-white/70 hover:text-white py-2 pl-4 text-sm transition">Kontakt</a>
                     <div class="pb-2"></div>
                 </div>
             </div>
         </div>
     </div>
-    </div>
 </nav>
 
 
 <!-- ════════════════════════════════════════
-     PAGE HEADER
+     HERO
 ════════════════════════════════════════ -->
-<section class="pt-44 pb-20 px-6 relative overflow-hidden" style="background:#657eb4">
-    <div class="absolute inset-0 opacity-[0.05]"
-         style="background-image:linear-gradient(rgba(245,163,0,1) 1px,transparent 1px),linear-gradient(90deg,rgba(245,163,0,1) 1px,transparent 1px);background-size:48px 48px">
-    </div>
-    <div class="max-w-7xl mx-auto relative z-10 reveal visible">
-        <p class="text-gold text-xs tracking-[0.3em] uppercase mb-4">Naše služby</p>
-        <h1 class="font-serif text-4xl lg:text-5xl font-bold text-white">BOZP — bezpečnost a ochrana zdraví při práci.</h1>
-    </div>
-</section>
-
-
-<!-- ════════════════════════════════════════
-     OBSAH
-════════════════════════════════════════ -->
-<section class="bg-cream py-24 px-6">
-    <div class="max-w-4xl mx-auto reveal">
-        <p class="text-gray-500 text-lg leading-relaxed mb-12">
-            Postaráme se o kompletní správu BOZP: vyhledání a vyhodnocení rizik na pracovišti, zpracování registru rizik, kategorizaci prací i zpracování a pravidelnou aktualizaci dokumentace BOZP. Proškolíme zaměstnance i vedoucí pracovníky a povedeme elektronickou knihu úrazů, abyste měli vše na jednom místě.
-        </p>
-
-        <div class="grid sm:grid-cols-2 gap-x-10 gap-y-4">
-            <div class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-gold flex-shrink-0 mt-2"></span><span class="text-navy text-sm">Vyhledání a vyhodnocení rizik na pracovišti</span></div>
-            <div class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-gold flex-shrink-0 mt-2"></span><span class="text-navy text-sm">Zpracování registru rizik a kategorizace prací</span></div>
-            <div class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-gold flex-shrink-0 mt-2"></span><span class="text-navy text-sm">Tvorba a pravidelná aktualizace dokumentace BOZP</span></div>
-            <div class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-gold flex-shrink-0 mt-2"></span><span class="text-navy text-sm">Školení zaměstnanců i vedoucích pracovníků</span></div>
-            <div class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-gold flex-shrink-0 mt-2"></span><span class="text-navy text-sm">Vedení elektronické knihy úrazů</span></div>
-            <div class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-gold flex-shrink-0 mt-2"></span><span class="text-navy text-sm">Zastoupení při kontrolách inspektorátu práce</span></div>
+<section class="relative overflow-hidden" style="background:#0B1929">
+    <img src="img./zdravi.avif" alt="" class="absolute inset-0 w-full h-full object-cover object-center">
+    <div class="absolute inset-0" style="background:linear-gradient(115deg, rgba(11,25,41,.75) 0%, rgba(11,25,41,.60) 38%, rgba(11,25,41,.30) 70%, rgba(11,25,41,.15) 100%)"></div>
+    <div class="absolute top-1/4 right-8 lg:right-24 w-64 lg:w-96 h-64 lg:h-96 border border-gold/10 rotate-45 pointer-events-none z-[1]"></div>
+    <div class="absolute top-1/3 right-16 lg:right-36 w-40 lg:w-60 h-40 lg:h-60 border border-gold/8 rotate-45 pointer-events-none z-[1]"></div>
+    <div class="absolute left-0 top-0 w-1 h-full bg-gradient-to-b from-transparent via-gold to-transparent opacity-40"></div>
+    <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 pt-44 pb-16 lg:py-44 w-full grid lg:grid-cols-2 gap-16 items-center">
+        <div class="reveal visible" style="transition-delay:0s">
+            <p class="text-gold text-xs tracking-[0.35em] uppercase mb-5">Naše služby · BOZP</p>
+            <h1 class="font-serif text-4xl lg:text-5xl xl:text-6xl font-bold text-white leading-[1.15] mb-8">
+                BOZP – <span class="text-gold">B</span>ezpečnost a <span class="text-gold">O</span>chrana <span class="text-gold">Z</span>draví při <span class="text-gold">P</span>ráci
+            </h1>
+            <div class="info-card-wrap reveal visible">
+                <div class="info-chip" aria-hidden="true"><span>?</span></div>
+                <div class="info-card" id="infoCard" role="button" tabindex="0" aria-expanded="false" aria-label="Proč řešit BOZP — klikněte pro zobrazení">
+                    <div class="info-card__header">
+                        <div class="info-card__meta">
+                            <span class="info-card__ref">Věděli jste?</span>
+                            <span class="info-card__title">Proč je BOZP povinné pro každého zaměstnavatele?</span>
+                        </div>
+                        <div class="info-card__chevron" aria-hidden="true">
+                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 5L7 9.5L11.5 5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </div>
+                    </div>
+                    <div class="info-divider-grid"><div><div class="info-divider-line"></div></div></div>
+                    <div class="info-body-grid"><div>
+                        <div class="info-body">
+                            <p>Každý zaměstnavatel má ze zákona povinnost zajistit bezpečnost a ochranu zdraví při práci. Jenže správa BOZP je časově náročná, legislativa se mění každý rok a chyba v dokumentaci nebo proškolení vás může přijít draho. Postaráme se o celou agendu za vás — od vstupního auditu přes zpracování dokumentace až po zastupování při kontrolách inspektorátu práce.</p>
+                            <div class="info-footnote">
+                                <div class="info-footnote-dot"></div>
+                                <span class="info-footnote-text">Správa BOZP s.r.o.</span>
+                            </div>
+                        </div>
+                    </div></div>
+                </div>
+            </div>
+        </div>
+        <div class="hidden lg:block reveal visible" style="transition-delay:.15s">
+            <div class="ml-auto max-w-sm border border-white/20 p-8 backdrop-blur-md" style="background:rgba(255,255,255,.18)">
+                <p class="text-gold text-[10px] tracking-[0.3em] uppercase mb-5">Co pro vás děláme</p>
+                <p class="text-white/90 text-sm leading-relaxed">
+                    Přebíráme za vás celou agendu BOZP — od vstupního auditu přes zpracování dokumentace a školení zaměstnanců až po zastupování při kontrolách inspektorátu práce.
+                </p>
+                <p class="text-white/90 text-sm leading-relaxed mt-4">
+                    Vy řídíte firmu. My hlídáme, aby vám nehrozila pokuta, sankce nebo zastavení provozu.
+                </p>
+            </div>
         </div>
     </div>
 </section>
 
 
 <!-- ════════════════════════════════════════
-     CTA BANNER
+     CO ZAHRNUJE BOZP
+════════════════════════════════════════ -->
+<section class="bg-cream py-24 px-6">
+    <div class="max-w-4xl mx-auto">
+
+        <div class="reveal mb-12">
+            <p class="text-gold text-xs tracking-[0.35em] uppercase mb-4">Rozsah služby</p>
+            <h2 class="font-serif text-3xl lg:text-4xl font-bold text-navy mb-6">Co všechno BOZP zahrnuje?</h2>
+            <p class="text-gray-500 text-base leading-relaxed mb-4">
+                Bezpečnost a ochrana zdraví při práci není jen hromada papírů v šanonu. Je to funkční systém, který chrání vaše zaměstnance, a zároveň vás jako zaměstnavatele před sankcemi ze strany státního dozoru. Zákoník práce a zákon č. 309/2006 Sb. ukládají poměrně konkrétní povinnosti — a inspektorát práce je při kontrolách skutečně prověřuje.
+            </p>
+        </div>
+
+        <!-- Warning callout -->
+        <div class="reveal mb-14 flex gap-5 p-6 border-l-4 border-gold" style="background:rgba(245,163,0,.07)">
+            <div class="flex-shrink-0 mt-0.5">
+                <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v4m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg>
+            </div>
+            <p class="text-navy text-sm leading-relaxed">
+                <strong class="font-semibold">Za neplnění povinností BOZP hrozí pokuta až 2 000 000 Kč.</strong> Nejčastěji inspektoři nacházejí pochybení právě v dokumentaci a prokazatelnosti školení.
+            </p>
+        </div>
+
+        <!-- Services grid -->
+        <div class="reveal">
+            <p class="text-navy text-xs tracking-[0.25em] uppercase font-semibold mb-8">Přebíráme za vás tyto konkrétní oblasti:</p>
+            <div class="grid sm:grid-cols-2 gap-x-10 gap-y-4">
+                <div class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-gold flex-shrink-0 mt-[7px]"></span><span class="text-navy text-sm">Vstupní audit a prohlídka pracoviště</span></div>
+                <div class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-gold flex-shrink-0 mt-[7px]"></span><span class="text-navy text-sm">Vyhledání a hodnocení rizik</span></div>
+                <div class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-gold flex-shrink-0 mt-[7px]"></span><span class="text-navy text-sm">Zpracování registru rizik</span></div>
+                <div class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-gold flex-shrink-0 mt-[7px]"></span><span class="text-navy text-sm">Kategorizace prací</span></div>
+                <div class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-gold flex-shrink-0 mt-[7px]"></span><span class="text-navy text-sm">Kompletní dokumentace BOZP</span></div>
+                <div class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-gold flex-shrink-0 mt-[7px]"></span><span class="text-navy text-sm">Vstupní i periodická školení zaměstnanců</span></div>
+                <div class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-gold flex-shrink-0 mt-[7px]"></span><span class="text-navy text-sm">Školení vedoucích pracovníků</span></div>
+                <div class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-gold flex-shrink-0 mt-[7px]"></span><span class="text-navy text-sm">Roční prověrka BOZP na pracovišti</span></div>
+                <div class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-gold flex-shrink-0 mt-[7px]"></span><span class="text-navy text-sm">Evidence a vyšetřování pracovních úrazů</span></div>
+                <div class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-gold flex-shrink-0 mt-[7px]"></span><span class="text-navy text-sm">Vedení elektronické knihy úrazů</span></div>
+                <div class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-gold flex-shrink-0 mt-[7px]"></span><span class="text-navy text-sm">Koordinace pracovnělékařských prohlídek</span></div>
+                <div class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-gold flex-shrink-0 mt-[7px]"></span><span class="text-navy text-sm">Zastoupení při kontrolách OIP a KHS</span></div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- ════════════════════════════════════════
+     JAK SPOLUPRÁCE PROBÍHÁ
+════════════════════════════════════════ -->
+<section class="py-24 px-6 relative overflow-hidden" style="background:#0B1929">
+    <img src="img./helmet.avif" alt="" aria-hidden="true" class="absolute inset-0 w-full h-full object-cover object-center">
+    <div class="absolute inset-0" style="background:rgba(11,25,41,0.68)"></div>
+    <div class="max-w-6xl mx-auto relative z-10">
+
+        <div class="reveal mb-16">
+            <p class="text-gold text-xs tracking-[0.35em] uppercase mb-4">Postup</p>
+            <h2 class="font-serif text-3xl lg:text-4xl font-bold text-white mb-4">Jak spolupráce probíhá</h2>
+            <p class="text-white/60 text-base max-w-xl">Nepřicházíme s generickou šablonou dokumentace. Každý provoz je jiný — a tomu přizpůsobujeme i celý systém BOZP.</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+            <div class="reveal bg-white/5 border border-white/10 p-8 flex flex-col hover:border-gold/40 transition">
+                <div class="step-number mb-2">1</div>
+                <h3 class="font-serif text-lg font-bold text-white mb-3">Vstupní audit</h3>
+                <p class="text-white/60 text-sm leading-relaxed flex-1">Přijedeme k vám, prohlédneme pracoviště a zkontrolujeme stávající dokumentaci. Zjistíme, co chybí, co je zastaralé a co funguje dobře.</p>
+            </div>
+
+            <div class="reveal bg-white/5 border border-white/10 p-8 flex flex-col hover:border-gold/40 transition">
+                <div class="step-number mb-2">2</div>
+                <h3 class="font-serif text-lg font-bold text-white mb-3">Nastavení systému</h3>
+                <p class="text-white/60 text-sm leading-relaxed flex-1">Zpracujeme dokumentaci BOZP na míru — vyhledání rizik, registr, kategorizace prací, interní předpisy. Vše odpovídá aktuální legislativě a vašemu konkrétnímu provozu.</p>
+            </div>
+
+            <div class="reveal bg-white/5 border border-white/10 p-8 flex flex-col hover:border-gold/40 transition">
+                <div class="step-number mb-2">3</div>
+                <h3 class="font-serif text-lg font-bold text-white mb-3">Školení zaměstnanců</h3>
+                <p class="text-white/60 text-sm leading-relaxed flex-1">Provedeme vstupní i periodická školení — prezenčně nebo formou e-learningu. O každém školení vedeme dokladatelnou evidenci, která obstojí i při kontrole inspektorátu.</p>
+            </div>
+
+            <div class="reveal bg-white/5 border border-white/10 p-8 flex flex-col hover:border-gold/40 transition">
+                <div class="step-number mb-2">4</div>
+                <h3 class="font-serif text-lg font-bold text-white mb-3">Průběžná správa</h3>
+                <p class="text-white/60 text-sm leading-relaxed flex-1">Hlídáme termíny, aktualizujeme dokumentaci při každé změně legislativy a provádíme pravidelné prověrky. Pokud přijde kontrola, jsme tam s vámi.</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- ════════════════════════════════════════
+     PROČ OUTSOURCING
+════════════════════════════════════════ -->
+<section class="bg-cream py-24 px-6">
+    <div class="max-w-6xl mx-auto">
+
+        <div class="reveal mb-14">
+            <p class="text-gold text-xs tracking-[0.35em] uppercase mb-4">Výhody</p>
+            <h2 class="font-serif text-3xl lg:text-4xl font-bold text-navy">Proč outsourcing BOZP dává smysl</h2>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6">
+
+            <div class="benefit-card bg-white p-10 flex flex-col reveal" style="border-top:4px solid #F5A300">
+                <div class="w-12 h-12 flex items-center justify-center mb-6" style="background:rgba(245,163,0,.1)">
+                    <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                </div>
+                <h3 class="font-serif text-xl font-bold text-navy mb-4">Levněji než interní zaměstnanec</h3>
+                <div class="w-8 h-px bg-gold mb-4"></div>
+                <p class="text-gray-500 text-sm leading-relaxed flex-1">Odborně způsobilá osoba na plný úvazek vyjde firmu i přes 60 000 Kč měsíčně. Outsourcing BOZP je výrazně dostupnější řešení se stejnou — nebo vyšší — kvalitou.</p>
+            </div>
+
+            <div class="benefit-card bg-white p-10 flex flex-col reveal" style="border-top:4px solid #657eb4">
+                <div class="w-12 h-12 flex items-center justify-center mb-6" style="background:rgba(101,126,180,.1)">
+                    <svg class="w-6 h-6" style="color:#657eb4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                </div>
+                <h3 class="font-serif text-xl font-bold text-navy mb-4">Legislativa pod kontrolou</h3>
+                <div class="w-8 h-px mb-4" style="background:#657eb4"></div>
+                <p class="text-gray-500 text-sm leading-relaxed flex-1">Zákony v oblasti bezpečnosti práce se mění pravidelně. Hlídáme změny za vás a dokumentaci aktualizujeme bez toho, abyste museli cokoliv sledovat sami.</p>
+            </div>
+
+            <div class="benefit-card bg-white p-10 flex flex-col reveal" style="border-top:4px solid #0B1929">
+                <div class="w-12 h-12 flex items-center justify-center mb-6" style="background:rgba(11,25,41,.07)">
+                    <svg class="w-6 h-6 text-navy" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                </div>
+                <h3 class="font-serif text-xl font-bold text-navy mb-4">Zastoupení při kontrole</h3>
+                <div class="w-8 h-px bg-navy mb-4"></div>
+                <p class="text-gray-500 text-sm leading-relaxed flex-1">Při kontrole oblastního inspektorátu práce nebo krajské hygienické stanice vás zastoupíme a svou práci si obhájíme. Nejste na to sami.</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- ════════════════════════════════════════
+     FAQ
+════════════════════════════════════════ -->
+<section class="bg-white py-24 px-6">
+    <div class="max-w-3xl mx-auto">
+
+        <div class="text-center mb-14 reveal">
+            <p class="text-gold text-xs tracking-[0.35em] uppercase mb-4">Dotazy</p>
+            <h2 class="font-serif text-3xl lg:text-4xl font-bold text-navy">Nejčastější otázky o BOZP</h2>
+        </div>
+
+        <div class="space-y-3">
+
+            <div class="faq-item reveal">
+                <button class="faq-trigger" aria-expanded="false">
+                    Musím mít BOZP jako malá firma nebo živnostník?
+                    <svg class="faq-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+                </button>
+                <div class="faq-body-grid"><div>
+                    <p class="faq-body">Ano, povinnosti BOZP se vztahují na každého zaměstnavatele bez ohledu na počet zaměstnanců. Od prvního zaměstnance máte povinnost zajistit bezpečné pracovní podmínky, vést dokumentaci a provádět školení. Živnostníci bez zaměstnanců mají zjednodušené povinnosti, ale odpovědnost za bezpečné pracoviště zůstává.</p>
+                </div></div>
+            </div>
+
+            <div class="faq-item reveal">
+                <button class="faq-trigger" aria-expanded="false">
+                    Co je kategorizace prací a kdo ji musí zpracovat?
+                    <svg class="faq-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+                </button>
+                <div class="faq-body-grid"><div>
+                    <p class="faq-body">Kategorizace prací je povinné zařazení každé vykonávané práce do jedné ze čtyř kategorií (1–4) podle míry zdravotního rizika. Povinnost ji zpracovat má každý zaměstnavatel. Kategorie 3 a 4 pak podléhají schválení krajskou hygienickou stanicí. Bez platné kategorizace není možné správně nastavit frekvenci lékařských prohlídek ani periody školení.</p>
+                </div></div>
+            </div>
+
+            <div class="faq-item reveal">
+                <button class="faq-trigger" aria-expanded="false">
+                    Jak často se musí provádět školení BOZP?
+                    <svg class="faq-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+                </button>
+                <div class="faq-body-grid"><div>
+                    <p class="faq-body">Vstupní školení je povinné pro každého nového zaměstnance před nástupem k výkonu práce. Frekvence periodického opakování se odvíjí od kategorie práce a vašich interních předpisů — typicky 1× ročně nebo 1× za dva roky. Školení vedoucích pracovníků probíhá samostatně a musí pokrývat rozšířenou odpovědnost za podřízené.</p>
+                </div></div>
+            </div>
+
+            <div class="faq-item reveal">
+                <button class="faq-trigger" aria-expanded="false">
+                    Co je registr rizik a proč ho potřebuji?
+                    <svg class="faq-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+                </button>
+                <div class="faq-body-grid"><div>
+                    <p class="faq-body">Registr rizik je dokument, ve kterém jsou identifikována, zhodnocena a ohodnocena všechna rizika na vašem pracovišti. Zákon ho vyžaduje jako základ pro nastavení bezpečnostních opatření a obsah školení zaměstnanců. Při kontrole inspektorátu práce je jedním z prvních dokumentů, které inspektor žádá.</p>
+                </div></div>
+            </div>
+
+            <div class="faq-item reveal">
+                <button class="faq-trigger" aria-expanded="false">
+                    Přijde ke mně inspektorát práce bez ohlášení?
+                    <svg class="faq-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+                </button>
+                <div class="faq-body-grid"><div>
+                    <p class="faq-body">Ano. Oblastní inspektoráty práce provádějí jak ohlášené, tak neohlášené kontroly — a zákon jim to umožňuje. Na kontrolu je proto nejlepší být připraven průběžně, ne až po doručení avíza. Právě to je jeden z hlavních důvodů, proč naši klienti oceňují průběžnou správu BOZP.</p>
+                </div></div>
+            </div>
+
+            <div class="faq-item reveal">
+                <button class="faq-trigger" aria-expanded="false">
+                    Jak rychle dokážete BOZP ve firmě zavést?
+                    <svg class="faq-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+                </button>
+                <div class="faq-body-grid"><div>
+                    <p class="faq-body">Po vstupním auditu obvykle nastavíme základní dokumentaci a provedeme školení do 2–4 týdnů. Přesný termín záleží na velikosti firmy, počtu pracovišť a aktuálním stavu vaší agendy. U větších provozů pracujeme po etapách tak, aby byl systém funkční co nejdříve.</p>
+                </div></div>
+            </div>
+
+            <div class="faq-item reveal">
+                <button class="faq-trigger" aria-expanded="false">
+                    Zajišťujete BOZP i pro firmy mimo Hradec Králové?
+                    <svg class="faq-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+                </button>
+                <div class="faq-body-grid"><div>
+                    <p class="faq-body">Ano, spolupracujeme s firmami po celé České republice. Pro vzdálenější lokality přizpůsobujeme formu návštěv a školení — část agendy řešíme vzdáleně, pravidelné prověrky a audity pak osobně přímo u vás. Vzdálenost není překážka.</p>
+                </div></div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- ════════════════════════════════════════
+     CTA
 ════════════════════════════════════════ -->
 <section class="py-24 px-6 relative overflow-hidden" style="background:#657eb4">
     <div class="absolute inset-0 opacity-[0.04]"
-         style="background-image:linear-gradient(rgba(245,163,0,1) 1px,transparent 1px),linear-gradient(90deg,rgba(245,163,0,1) 1px,transparent 1px);background-size:48px 48px">
-    </div>
+         style="background-image:linear-gradient(rgba(245,163,0,1) 1px,transparent 1px),linear-gradient(90deg,rgba(245,163,0,1) 1px,transparent 1px);background-size:48px 48px"></div>
     <div class="absolute right-0 top-0 w-1/2 h-full opacity-5">
-        <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
-            <path d="M200 20L20 110V220c0 110 80 213 180 240C300 433 380 330 380 220V110L200 20z" fill="#F5A300"/>
-        </svg>
+        <svg viewBox="0 0 400 400" fill="none" class="w-full h-full"><path d="M200 20L20 110V220c0 110 80 213 180 240C300 433 380 330 380 220V110L200 20z" fill="#F5A300"/></svg>
     </div>
-    <div class="max-w-4xl mx-auto text-center relative z-10 reveal">
-        <p class="text-gold text-xs tracking-[0.3em] uppercase mb-6">Spolupráce</p>
-        <h2 class="font-serif text-4xl lg:text-6xl font-bold text-white mb-8 leading-tight">
-            Nabízíme možnost<br>obchodní spolupráce.
+    <div class="max-w-3xl mx-auto text-center relative z-10 reveal">
+        <p class="text-gold text-xs tracking-[0.35em] uppercase mb-6">Zjistěte, jak na tom jste</p>
+        <h2 class="font-serif text-3xl lg:text-5xl font-bold text-white mb-6 leading-tight">
+            Chcete vědět, jak na tom<br>vaše firma aktuálně je?
         </h2>
-        <p class="text-white/75 text-lg leading-relaxed max-w-2xl mx-auto mb-12">
-            Ať jste malá živnost nebo velký průmyslový podnik — máme řešení pro každého. Ozvěte se nám pro bezplatnou konzultaci.
+        <p class="text-white/70 text-base leading-relaxed max-w-xl mx-auto mb-10">
+            Provedeme nezávazný vstupní audit BOZP a řekneme vám přesně, co chybí a co by šlo vylepšit.
         </p>
-        <a href="index.html#kontakt" class="inline-block bg-gold hover:bg-gold-l text-white px-14 py-5 text-xs tracking-[0.3em] uppercase transition font-semibold">
-            Kontaktujte nás
+        <a href="index.html#kontakt" class="inline-block bg-gold hover:bg-gold-l text-white px-12 py-5 text-xs tracking-[0.3em] uppercase transition font-semibold">
+            Nezávazná konzultace
         </a>
     </div>
 </section>
@@ -254,52 +522,45 @@
 
         <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-10 pb-14 border-b border-black/10">
 
-            <!-- Brand -->
             <div class="lg:col-span-1">
                 <a href="index.html" class="flex items-center mb-6">
                     <img src="img./logo-full-navy.png" alt="Správa BOZP s.r.o." class="h-9 w-auto">
                 </a>
-                <p class="text-navy/75 text-sm leading-relaxed">
-                    Specialisté na bezpečnost práce a požární ochranu. Komplexní outsourcing BOZP pro podniky všech velikostí.
-                </p>
+                <p class="text-navy/75 text-sm leading-relaxed">Specialisté na bezpečnost práce a požární ochranu. Komplexní outsourcing BOZP pro podniky všech velikostí.</p>
             </div>
 
-            <!-- Services -->
             <div>
                 <h4 class="text-navy text-[10px] font-bold uppercase tracking-[0.25em] mb-6">Služby</h4>
                 <ul class="space-y-3">
-                    <li><a href="bozp.html" class="text-navy/70 text-sm hover:text-navy transition">BOZP</a></li>
-                    <li><a href="pozarni-ochrana.html" class="text-navy/70 text-sm hover:text-navy transition">Požární ochrana</a></li>
+                    <li><a href="bozp.html"                  class="text-navy/70 text-sm hover:text-navy transition">BOZP</a></li>
+                    <li><a href="pozarni-ochrana.html"       class="text-navy/70 text-sm hover:text-navy transition">Požární ochrana</a></li>
                     <li><a href="zivotni-prostredi-ems.html" class="text-navy/70 text-sm hover:text-navy transition">Životní prostředí - EMS</a></li>
-                    <li><a href="obce.html" class="text-navy/70 text-sm hover:text-navy transition">Obce</a></li>
-                    <li><a href="slovnicek-pojmu.html" class="text-navy/70 text-sm hover:text-navy transition">Slovníček pojmů</a></li>
+                    <li><a href="obce.html"                  class="text-navy/70 text-sm hover:text-navy transition">Obce</a></li>
+                    <li><a href="slovnicek-pojmu.html"       class="text-navy/70 text-sm hover:text-navy transition">Slovníček pojmů</a></li>
                 </ul>
             </div>
 
-            <!-- Company -->
             <div>
                 <h4 class="text-navy text-[10px] font-bold uppercase tracking-[0.25em] mb-6">Společnost</h4>
                 <ul class="space-y-3">
-                    <li><a href="index.html#o-nas"  class="text-navy/70 text-sm hover:text-navy transition">O nás</a></li>
-                    <li><a href="partneri.html"     class="text-navy/70 text-sm hover:text-navy transition">Partneři</a></li>
+                    <li><a href="o-nas.html"   class="text-navy/70 text-sm hover:text-navy transition">O nás</a></li>
+                    <li><a href="partneri.html"      class="text-navy/70 text-sm hover:text-navy transition">Partneři</a></li>
                     <li><a href="index.html#kontakt" class="text-navy/70 text-sm hover:text-navy transition">Kontakt</a></li>
-                    <li><a href="#"                 class="text-navy/70 text-sm hover:text-navy transition">Ochrana osobních údajů</a></li>
+                    <li><a href="#"                  class="text-navy/70 text-sm hover:text-navy transition">Ochrana osobních údajů</a></li>
                 </ul>
             </div>
 
-            <!-- Contact -->
             <div>
                 <h4 class="text-navy text-[10px] font-bold uppercase tracking-[0.25em] mb-6">Kontakt</h4>
                 <address class="not-italic space-y-3 text-navy/70 text-sm">
                     <p>Zemědělská 1145/4a<br>Slezské Předměstí<br>500 03 Hradec Králové</p>
-                    <a href="tel:+420737517995"          class="block hover:text-navy transition font-medium">+420 737 517 995</a>
+                    <a href="tel:+420737517995"           class="block hover:text-navy transition font-medium">+420 737 517 995</a>
                     <a href="mailto:asistentka@spravaBOZP.cz" class="block hover:text-navy transition break-all">asistentka@spravaBOZP.cz</a>
                 </address>
             </div>
 
         </div>
 
-        <!-- Bottom bar -->
         <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
             <p class="text-navy/60 text-xs">© 2024 Správa BOZP s.r.o. Všechna práva vyhrazena.</p>
             <a href="#" class="text-navy/60 text-xs hover:text-navy transition">Prohlášení o zásadách ochrany osobních údajů</a>
@@ -313,15 +574,15 @@
      JAVASCRIPT
 ════════════════════════════════════════ -->
 <script>
-    // ── Navbar scroll + mobile menu open both trigger the navy "scrolled" look ──
+    // ── Navbar ──
     const nav = document.getElementById('navbar');
     const mobMenu = document.getElementById('mob-menu');
     function updateNavState() {
         nav.classList.toggle('scrolled', window.scrollY > 60 || mobMenu.classList.contains('open'));
     }
     window.addEventListener('scroll', updateNavState, { passive: true });
+    updateNavState();
 
-    // ── Mobile menu ──
     const ham = document.getElementById('ham');
     ham.addEventListener('click', () => {
         mobMenu.classList.toggle('open');
@@ -339,15 +600,10 @@
             const isOpen = panel.style.maxHeight && panel.style.maxHeight !== '0px';
             panel.style.maxHeight = isOpen ? '0px' : panel.scrollHeight + 'px';
             icon.style.transform  = isOpen ? '' : 'rotate(180deg)';
-            if (!isOpen) {
-                const outer = document.getElementById('mob-menu');
-                const inner = outer.querySelector('.bg-white');
-                outer.style.maxHeight = Math.max(600, inner.scrollHeight + 16) + 'px';
-            }
         });
     });
 
-    // ── Smooth scroll + close mob menu on in-page link click ──
+    // ── Smooth scroll ──
     document.querySelectorAll('a[href^="#"]').forEach(a => {
         a.addEventListener('click', e => {
             const id = a.getAttribute('href');
@@ -355,8 +611,6 @@
             e.preventDefault();
             const el = document.querySelector(id);
             if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            mobMenu.classList.remove('open');
-            updateNavState();
         });
     });
 
@@ -368,13 +622,40 @@
                 observer.unobserve(entry.target);
             }
         });
-    }, { threshold: 0.12 });
-
+    }, { threshold: 0.1 });
     document.querySelectorAll('.reveal').forEach((el, i) => {
         el.style.transitionDelay = (i % 4) * 0.08 + 's';
         observer.observe(el);
     });
+
+    // ── Info card toggle ──
+    (function(){
+        var c = document.getElementById('infoCard');
+        if(!c) return;
+        function toggle(){ var o = c.getAttribute('aria-expanded')==='true'; c.setAttribute('aria-expanded', String(!o)); }
+        c.addEventListener('click', toggle);
+        c.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); toggle(); } });
+    })();
+
+    // ── FAQ accordion ──
+    (function(){
+        document.querySelectorAll('.faq-trigger').forEach(function(btn){
+            btn.addEventListener('click', function(){
+                var item = btn.closest('.faq-item');
+                var isOpen = item.classList.contains('is-open');
+                document.querySelectorAll('.faq-item').forEach(function(i){
+                    i.classList.remove('is-open');
+                    i.querySelector('.faq-trigger').setAttribute('aria-expanded','false');
+                });
+                if(!isOpen){
+                    item.classList.add('is-open');
+                    btn.setAttribute('aria-expanded','true');
+                }
+            });
+        });
+    })();
 </script>
 
+<script src="popup.js" defer></script>
 </body>
 </html>
