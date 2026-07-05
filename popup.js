@@ -24,19 +24,7 @@
     }
   }
 
-  // ── 7-day suppression ──────────────────────────────────
-  function wasDismissed() {
-    try {
-      var ts = localStorage.getItem(STORAGE_KEY);
-      if (!ts) return false;
-      return (Date.now() - parseInt(ts, 10)) < DISMISS_DAYS * 86400000;
-    } catch (e) { return false; }
-  }
-  function markDismissed() {
-    try { localStorage.setItem(STORAGE_KEY, Date.now().toString()); } catch (e) {}
-  }
-
-  if (!forceShow && wasDismissed()) return;
+  function markDismissed() {}
 
   // ── State ──────────────────────────────────────────────
   var shown = false;
