@@ -13,7 +13,7 @@
   var SCROLL_THRESHOLD  = 0.50;    // 50 % stránky
 
   // ── Excluded paths ─────────────────────────────────────
-  var EXCLUDED = ['/kontakt', '/dekujeme'];
+  var EXCLUDED = ['/kontakt', '/dekujeme', '/pruvodce-bozp-po-ems'];
   var path = window.location.pathname.toLowerCase();
   for (var i = 0; i < EXCLUDED.length; i++) {
     if (path.indexOf(EXCLUDED[i]) !== -1) return;
