@@ -9,7 +9,7 @@
   var STORAGE_KEY       = 'bozp_popup_dismissed';
   var DISMISS_DAYS      = 7;
   var DELAY_DESKTOP     = 30000;   // 30 s
-  var DELAY_MOBILE      = 60000;   // 60 s
+  var DELAY_MOBILE      = 30000;   // 30 s
   var SCROLL_THRESHOLD  = 0.50;    // 50 % stránky
 
   // ── Force-show override: append ?popup=1 to any URL ───
