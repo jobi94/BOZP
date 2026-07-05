@@ -12,11 +12,16 @@
   var DELAY_MOBILE      = 60000;   // 60 s
   var SCROLL_THRESHOLD  = 0.50;    // 50 % stránky
 
+  // ── Force-show override: append ?popup=1 to any URL ───
+  var forceShow = window.location.search.indexOf('popup=1') !== -1;
+
   // ── Excluded paths ─────────────────────────────────────
-  var EXCLUDED = ['/kontakt', '/dekujeme', '/pruvodce-bozp-po-ems'];
-  var path = window.location.pathname.toLowerCase();
-  for (var i = 0; i < EXCLUDED.length; i++) {
-    if (path.indexOf(EXCLUDED[i]) !== -1) return;
+  if (!forceShow) {
+    var EXCLUDED = ['/kontakt', '/dekujeme', '/pruvodce-bozp-po-ems'];
+    var path = window.location.pathname.toLowerCase();
+    for (var i = 0; i < EXCLUDED.length; i++) {
+      if (path.indexOf(EXCLUDED[i]) !== -1) return;
+    }
   }
 
   // ── 7-day suppression ──────────────────────────────────
@@ -31,7 +36,7 @@
     try { localStorage.setItem(STORAGE_KEY, Date.now().toString()); } catch (e) {}
   }
 
-  if (wasDismissed()) return;
+  if (!forceShow && wasDismissed()) return;
 
   // ── State ──────────────────────────────────────────────
   var shown = false;
@@ -43,7 +48,7 @@
     if (shown) return;
     shown = true;
     clearTimeout(timerHandle);
-    window.removeEventListener('scroll', onScroll, false);
+    window.removeEventListener('scroll', onScroll, { passive: true });
     document.removeEventListener('mouseleave', onExitIntent, false);
     _inject();
   }
@@ -52,10 +57,14 @@
   timerHandle = setTimeout(showPopup, isMobile ? DELAY_MOBILE : DELAY_DESKTOP);
 
   function onScroll() {
-    var maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-    if (maxScroll > 0 && window.scrollY / maxScroll >= SCROLL_THRESHOLD) showPopup();
+    var scrolled = window.scrollY || document.documentElement.scrollTop || 0;
+    var maxScroll = (document.documentElement.scrollHeight || document.body.scrollHeight) - window.innerHeight;
+    if (maxScroll > 0 && scrolled / maxScroll >= SCROLL_THRESHOLD) showPopup();
   }
   window.addEventListener('scroll', onScroll, { passive: true });
+
+  // Check immediately in case the page loaded already scrolled past threshold
+  onScroll();
 
   function onExitIntent(e) {
     if (e.clientY <= 0) showPopup();

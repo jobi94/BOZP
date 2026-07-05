@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+    <link rel="preload" href="Poppins/Poppins-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="Poppins/Poppins-Bold.woff2" as="font" type="font/woff2" crossorigin>
     <title>BOZP — Bezpečnost a ochrana zdraví při práci | Správa BOZP s.r.o.</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -27,12 +30,12 @@
         }
     </script>
     <style>
-        @font-face { font-family:'Poppins'; src:url('Poppins/Poppins-Regular.ttf')    format('truetype'); font-weight:400; font-style:normal;  font-display:swap; }
-        @font-face { font-family:'Poppins'; src:url('Poppins/Poppins-Italic.ttf')     format('truetype'); font-weight:400; font-style:italic;  font-display:swap; }
-        @font-face { font-family:'Poppins'; src:url('Poppins/Poppins-Medium.ttf')     format('truetype'); font-weight:500; font-style:normal;  font-display:swap; }
-        @font-face { font-family:'Poppins'; src:url('Poppins/Poppins-SemiBold.ttf')   format('truetype'); font-weight:600; font-style:normal;  font-display:swap; }
-        @font-face { font-family:'Poppins'; src:url('Poppins/Poppins-Bold.ttf')       format('truetype'); font-weight:700; font-style:normal;  font-display:swap; }
-        @font-face { font-family:'Poppins'; src:url('Poppins/Poppins-BoldItalic.ttf') format('truetype'); font-weight:700; font-style:italic;  font-display:swap; }
+        @font-face { font-family:'Poppins'; src:url('Poppins/Poppins-Regular.woff2') format('woff2'),url('Poppins/Poppins-Regular.ttf') format('truetype'); font-weight:400; font-style:normal;  font-display:swap; }
+        @font-face { font-family:'Poppins'; src:url('Poppins/Poppins-Italic.woff2') format('woff2'),url('Poppins/Poppins-Italic.ttf') format('truetype'); font-weight:400; font-style:italic;  font-display:swap; }
+        @font-face { font-family:'Poppins'; src:url('Poppins/Poppins-Medium.woff2') format('woff2'),url('Poppins/Poppins-Medium.ttf') format('truetype'); font-weight:500; font-style:normal;  font-display:swap; }
+        @font-face { font-family:'Poppins'; src:url('Poppins/Poppins-SemiBold.woff2') format('woff2'),url('Poppins/Poppins-SemiBold.ttf') format('truetype'); font-weight:600; font-style:normal;  font-display:swap; }
+        @font-face { font-family:'Poppins'; src:url('Poppins/Poppins-Bold.woff2') format('woff2'),url('Poppins/Poppins-Bold.ttf') format('truetype'); font-weight:700; font-style:normal;  font-display:swap; }
+        @font-face { font-family:'Poppins'; src:url('Poppins/Poppins-BoldItalic.woff2') format('woff2'),url('Poppins/Poppins-BoldItalic.ttf') format('truetype'); font-weight:700; font-style:italic;  font-display:swap; }
 
         *, *::before, *::after { box-sizing: border-box; }
         body { font-family: 'Poppins', sans-serif; }
@@ -216,7 +219,7 @@
      HERO
 ════════════════════════════════════════ -->
 <section class="relative overflow-hidden" style="background:#0B1929">
-    <img src="img./zdravi.avif" alt="" class="absolute inset-0 w-full h-full object-cover object-center">
+    <img src="img./zdravi.avif" alt="" fetchpriority="high" decoding="async" class="absolute inset-0 w-full h-full object-cover object-center">
     <div class="absolute inset-0" style="background:linear-gradient(115deg, rgba(11,25,41,.75) 0%, rgba(11,25,41,.60) 38%, rgba(11,25,41,.30) 70%, rgba(11,25,41,.15) 100%)"></div>
     <div class="absolute top-1/4 right-8 lg:right-24 w-64 lg:w-96 h-64 lg:h-96 border border-gold/10 rotate-45 pointer-events-none z-[1]"></div>
     <div class="absolute top-1/3 right-16 lg:right-36 w-40 lg:w-60 h-40 lg:h-60 border border-gold/8 rotate-45 pointer-events-none z-[1]"></div>
@@ -318,7 +321,7 @@
      JAK SPOLUPRÁCE PROBÍHÁ
 ════════════════════════════════════════ -->
 <section class="py-24 px-6 relative overflow-hidden" style="background:#0B1929">
-    <img src="img./helmet.avif" alt="" aria-hidden="true" class="absolute inset-0 w-full h-full object-cover object-center">
+    <img loading="lazy" src="img./helmet.avif" alt="" aria-hidden="true" class="absolute inset-0 w-full h-full object-cover object-center">
     <div class="absolute inset-0" style="background:rgba(11,25,41,0.68)"></div>
     <div class="max-w-6xl mx-auto relative z-10">
 
