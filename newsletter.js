@@ -11,8 +11,7 @@
   var SCROLL_THRESHOLD = 0.70;
   var SESSION_KEY      = 'bozp_nl_seen';
 
-  // Session suppression
-  try { if (sessionStorage.getItem(SESSION_KEY) === '1') return; } catch (e) {}
+  // No session suppression — show on every visit
 
   // Excluded paths
   var EXCLUDED = ['/kontakt', '/dekujeme'];
@@ -31,7 +30,6 @@
       return;
     }
     shown = true;
-    try { sessionStorage.setItem(SESSION_KEY, '1'); } catch (e) {}
     _inject();
   }
 
