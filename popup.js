@@ -221,16 +221,17 @@
       '#bozp-download:hover{background:#152438;}',
       '#bozp-download svg{width:16px;height:16px;flex-shrink:0;}',
 
-      /* ── Close ── */
+      /* ── Close (outside modal, sibling inside overlay) ── */
       '#bozp-close-wrap{',
-        'position:absolute;top:12px;right:12px;z-index:10;',
+        'position:absolute;top:16px;right:16px;z-index:100000;',
         'display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;',
-        'color:#fff;background:rgba(11,25,41,.55);',
+        'color:#fff;background:rgba(11,25,41,.72);',
         'padding:8px 10px;',
         'transition:background .2s;',
+        '-webkit-tap-highlight-color:transparent;',
       '}',
-      '#bozp-close-wrap:hover{background:rgba(11,25,41,.85);}',
-      '#bozp-close-x{font-size:18px;font-weight:700;line-height:1;}',
+      '#bozp-close-wrap:hover{background:#0B1929;}',
+      '#bozp-close-x{font-size:20px;font-weight:700;line-height:1;}',
       '#bozp-close-label{font-size:9px;letter-spacing:.06em;line-height:1.4;text-align:center;opacity:.75;max-width:72px;}',
 
       /* ── Mobile ── */
@@ -242,7 +243,7 @@
         '#bozp-left::before,#bozp-left::after{display:none;}',
         '#bozp-right{padding:24px 20px 20px;}',
         '#bozp-h2{font-size:17px;}',
-        '#bozp-close-wrap{color:#fff;}',
+        '#bozp-close-label{display:none;}',
       '}',
     ].join('');
     document.head.appendChild(style);
@@ -251,13 +252,14 @@
     var wrap = document.createElement('div');
     wrap.innerHTML =
       '<div id="bozp-overlay">' +
-        '<div id="bozp-modal">' +
 
-          /* Close */
+          /* Close — outside modal so grid panels can't block it */
           '<div id="bozp-close-wrap" role="button" tabindex="0" aria-label="Zavřít">' +
             '<span id="bozp-close-x">×</span>' +
-            '<span id="bozp-close-label">Ne, díky. Raději riskuji pokutu.</span>' +
+            '<span id="bozp-close-label">Ne, díky.</span>' +
           '</div>' +
+
+        '<div id="bozp-modal">' +
 
           /* Left */
           '<div id="bozp-left">' +
@@ -300,7 +302,7 @@
               '</div>' +
               '<h3>Výborně! Průvodce je připraven.</h3>' +
               '<p>Stáhněte si PDF průvodce. Vaše kontaktní informace jsme si zaznamenali – pokud budete mít zájem, ozveme se.</p>' +
-              '<a id="bozp-download" href="Sprava_BOZP_Pruvodce.pdf" download="Sprava_BOZP_Pruvodce.pdf">' +
+              '<a id="bozp-download" href="Pruvodce-BOZP-PO-EMS.pdf" download="Pruvodce-BOZP-PO-EMS.pdf">' +
                 '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>' +
                 'Stáhnout průvodce (PDF)' +
               '</a>' +
