@@ -65,7 +65,6 @@
       '#nl-bar-inner{',
         'max-width:1100px;margin:0 auto;',
         'display:flex;align-items:center;gap:20px;flex-wrap:wrap;',
-        'position:relative;',
       '}',
 
       '#nl-bar-text{flex:1;min-width:190px;}',
@@ -117,7 +116,7 @@
       '}',
 
       '#nl-bar-close{',
-        'position:absolute;top:-2px;right:0;',
+        'position:absolute;top:12px;right:16px;',
         'width:32px;height:32px;',
         'display:flex;align-items:center;justify-content:center;',
         'color:rgba(255,255,255,.4);cursor:pointer;',
@@ -141,8 +140,8 @@
     var wrap = document.createElement('div');
     wrap.innerHTML =
       '<div id="nl-bar" role="complementary" aria-label="Odběr novinek">' +
+        '<button id="nl-bar-close" aria-label="Zavřít">&#215;</button>' +
         '<div id="nl-bar-inner">' +
-          '<button id="nl-bar-close" aria-label="Zavřít">&#215;</button>' +
           '<div id="nl-bar-text">' +
             '<p id="nl-bar-title">Přejete si odbírat novinky ze světa BOZP, PO a EMS?</p>' +
             '<p id="nl-bar-sub">Jednou za čas — žádný spam. Odhlásit se můžete kdykoliv.</p>' +
