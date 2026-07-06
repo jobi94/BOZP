@@ -229,6 +229,8 @@
         'padding:8px 10px;',
         'transition:background .2s;',
         '-webkit-tap-highlight-color:transparent;',
+        'touch-action:manipulation;',
+        'user-select:none;-webkit-user-select:none;',
       '}',
       '#bozp-close-wrap:hover{background:#0B1929;}',
       '#bozp-close-x{font-size:20px;font-weight:700;line-height:1;}',
@@ -323,29 +325,36 @@
     var formState   = document.getElementById('bozp-form-state');
     var successState = document.getElementById('bozp-success');
 
-    function close() {
-      markDismissed();
+    function dismissPopup() {
       var o = document.getElementById('bozp-overlay');
-      if (o) {
-        o.style.animation = 'bozpFadeIn .2s ease reverse';
-        setTimeout(function () { if (o.parentNode) o.parentNode.removeChild(o); }, 200);
-      }
+      if (!o || o._closing) return;
+      o._closing = true;
+      o.style.transition = 'opacity .2s ease';
+      o.style.opacity = '0';
+      o.style.pointerEvents = 'none';
+      setTimeout(function () { if (o.parentNode) o.parentNode.removeChild(o); }, 220);
     }
 
-    // Close on overlay click (not modal click)
+    // Close on overlay backdrop click
     overlay.addEventListener('click', function (e) {
-      if (e.target === overlay) close();
+      if (e.target === overlay) dismissPopup();
     });
 
-    // Close button
-    closeWrap.addEventListener('click', close);
+    // Close button — click + touchend so mobile doesn't need the 300ms delay
+    function onCloseActivate(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      dismissPopup();
+    }
+    closeWrap.addEventListener('click', onCloseActivate);
+    closeWrap.addEventListener('touchend', onCloseActivate);
     closeWrap.addEventListener('keydown', function (e) {
-      if (e.key === 'Enter' || e.key === ' ') close();
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); dismissPopup(); }
     });
 
     // ESC key
     document.addEventListener('keydown', function escHandler(e) {
-      if (e.key === 'Escape') { close(); document.removeEventListener('keydown', escHandler); }
+      if (e.key === 'Escape') { dismissPopup(); document.removeEventListener('keydown', escHandler); }
     });
 
     // Submit
