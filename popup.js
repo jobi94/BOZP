@@ -1,14 +1,15 @@
 /* ============================================================
    Správa BOZP – Popup: Průvodce BOZP, PO a EMS
-   Triggers: 30s desktop / 60s mobile / 50% scroll / exit intent
-   Suppressed: 7 days after close, excluded paths
+   Triggers: 30s / 50% scroll / exit intent (all devices)
+   Shows: once per visit/refresh; suppressed when navigating
+          between pages within the same session
    ============================================================ */
 (function () {
   'use strict';
 
-  var DELAY_DESKTOP     = 30000;   // 30 s
-  var DELAY_MOBILE      = 30000;   // 30 s
+  var DELAY             = 30000;   // 30 s
   var SCROLL_THRESHOLD  = 0.50;    // 50 % stránky
+  var SESSION_KEY       = 'bozp_popup_seen';
 
   // ── Force-show override: append ?popup=1 to any URL ───
   var forceShow = window.location.search.indexOf('popup=1') !== -1;
@@ -22,7 +23,16 @@
     }
   }
 
-  function markDismissed() {}
+  // ── Session suppression ────────────────────────────────
+  // Referrer from the same hostname = user navigated internally.
+  // No referrer (new tab, refresh, external) = fresh visit → always show.
+  if (!forceShow) {
+    var isInternalNav = !!(document.referrer &&
+      document.referrer.indexOf(window.location.hostname) !== -1);
+    var seenThisSession = false;
+    try { seenThisSession = sessionStorage.getItem(SESSION_KEY) === '1'; } catch (e) {}
+    if (isInternalNav && seenThisSession) return;
+  }
 
   // ── State ──────────────────────────────────────────────
   var shown = false;
@@ -36,11 +46,12 @@
     clearTimeout(timerHandle);
     window.removeEventListener('scroll', onScroll, { passive: true });
     document.removeEventListener('mouseleave', onExitIntent, false);
+    try { sessionStorage.setItem(SESSION_KEY, '1'); } catch (e) {}
     _inject();
   }
 
   // ── Triggers ───────────────────────────────────────────
-  timerHandle = setTimeout(showPopup, isMobile ? DELAY_MOBILE : DELAY_DESKTOP);
+  timerHandle = setTimeout(showPopup, DELAY);
 
   function onScroll() {
     var scrolled = window.scrollY || document.documentElement.scrollTop || 0;
