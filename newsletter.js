@@ -11,7 +11,11 @@
   var SCROLL_THRESHOLD = 0.70;
   var SESSION_KEY      = 'bozp_nl_seen';
 
-  // No session suppression — show on every visit
+  // Suppress for the entire browser session once shown or dismissed.
+  // sessionStorage clears automatically when the session ends (tab/window closed).
+  var seenThisSession = false;
+  try { seenThisSession = sessionStorage.getItem(SESSION_KEY) === '1'; } catch (e) {}
+  if (seenThisSession) return;
 
   // Excluded paths
   var EXCLUDED = ['/kontakt', '/dekujeme'];
@@ -30,6 +34,7 @@
       return;
     }
     shown = true;
+    try { sessionStorage.setItem(SESSION_KEY, '1'); } catch (e) {}
     _inject();
   }
 

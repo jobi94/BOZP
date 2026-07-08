@@ -24,14 +24,12 @@
   }
 
   // ── Session suppression ────────────────────────────────
-  // Referrer from the same hostname = user navigated internally.
-  // No referrer (new tab, refresh, external) = fresh visit → always show.
+  // Suppress for the entire browser session once shown or dismissed.
+  // sessionStorage clears automatically when the session ends (tab/window closed).
   if (!forceShow) {
-    var isInternalNav = !!(document.referrer &&
-      document.referrer.indexOf(window.location.hostname) !== -1);
     var seenThisSession = false;
     try { seenThisSession = sessionStorage.getItem(SESSION_KEY) === '1'; } catch (e) {}
-    if (isInternalNav && seenThisSession) return;
+    if (seenThisSession) return;
   }
 
   // ── State ──────────────────────────────────────────────
