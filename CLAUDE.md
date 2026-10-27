@@ -27,3 +27,6 @@ Design: inspirace crox.framer.website (šedá #e3e7eb, grafit, písmo Geist, ten
 - GitHub: https://github.com/jobi94/BOZP (větev main). 27. 10. 2026 nahrazen původní web (zůstává v historii, commit 8ad48b3). Nasazení na Vercel až na pokyn.
 - Bezpečnost (bodyguard 27. 10. 2026): hlavičky (CSP aj.) ve `vercel.json` – nová externí služba = upravit CSP; `.vercelignore` nepouští ven
   CLAUDE.md a tools/; mapa na kontaktu se načte až po kliknutí; partner odkazován přes https://spravapo.cz (www. má neplatný certifikát).
+- Hlavička: jen logo (bez textu) na všech zařízeních. Úvod: jedno tlačítko Nezávazná konzultace; na telefonu jen první věta textu (.lead-more skryté) a větší název.
+- Telefon: služby na úvodu = karusel (.svc-table.carousel + tečky v main.js); mobilní menu i seznam služeb v něm se plynule rozbalují.
+- Výkon: `lite` v main.js (telefony/dotyk) vypíná efekty navázané na scroll, mapa kreslí 30 snímků/s a během scrollu stojí, spouští se až po načtení.

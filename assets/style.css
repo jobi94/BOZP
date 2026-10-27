@@ -427,8 +427,8 @@ ul { margin: 0; padding: 0; list-style: none; }
 @keyframes growY { from { transform: scaleY(0); } }
 
 /* rozjíždění nadpisů po řádcích */
-.lines .ln { display: block; overflow: hidden; padding-bottom: .04em; margin-bottom: -.04em; }
-.lines .ln > span { display: inline-block; transform: translateY(108%); transition: transform 1.1s cubic-bezier(.16,.84,.24,1); }
+.lines .ln { display: block; overflow: hidden; padding: .22em 0 .04em; margin: -.22em 0 -.04em; }
+.lines .ln > span { display: inline-block; transform: translateY(145%); transition: transform 1.1s cubic-bezier(.16,.84,.24,1); }
 .lines .ln:nth-child(2) > span { transition-delay: .09s; }
 .lines .ln:nth-child(3) > span { transition-delay: .18s; }
 .is-loaded .lines .ln > span { transform: none; }
@@ -765,3 +765,68 @@ img, svg, video, canvas, iframe { max-width: 100%; }
 .map-consent { height: 100%; display: grid; place-content: center; gap: 16px; padding: 24px; text-align: center; background: repeating-linear-gradient(45deg, var(--bg-2) 0 2px, transparent 2px 12px), var(--paper); }
 .map-consent p { max-width: 46ch; margin: 0 auto; color: var(--ink-2); font-size: 15px; }
 .map-consent .flex-gap { justify-content: center; }
+
+/* =====================================================================
+   VÝKON: animace jen přes GPU, žádné drahé překreslování při scrollu
+   ===================================================================== */
+.header { backdrop-filter: none; -webkit-backdrop-filter: none; background: rgba(227, 231, 235, .97); }
+.ticker { contain: paint; }
+.ticker-track { will-change: transform; backface-visibility: hidden; }
+.helmet, .helmet-in { will-change: transform; }
+.helmet-in { filter: none; }
+.helmet svg { filter: drop-shadow(0 5px 6px rgba(26,27,28,.2)); }
+.wire { contain: layout paint; }
+.node { backface-visibility: hidden; }
+.colgrid i { will-change: transform; }
+.is-loaded .colgrid i { will-change: auto; }
+
+/* =====================================================================
+   TELEFON: čistý úvod a karusel služeb
+   ===================================================================== */
+@media (max-width: 700px) {
+  .brand img { width: 46px; height: 46px; }
+  .hero .h-xl { font-size: min(24.5vw, 150px); }   /* větší název firmy s přilbou */
+  .lead-more { display: none; }                    /* jen „Specialisté na…“ */
+  .hero-side .lead { font-size: 18px; }
+
+  .svc-table.carousel { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; border-top: 0;
+    margin: 0 calc(var(--gutter) * -1); padding: 2px var(--gutter) 6px; scroll-padding-inline: var(--gutter);
+    scrollbar-width: none; overscroll-behavior-x: contain; -webkit-overflow-scrolling: touch; }
+  .svc-table.carousel::-webkit-scrollbar { display: none; }
+  .svc-table.carousel > .svc-row { flex: 0 0 80%; scroll-snap-align: start; display: flex; flex-direction: column; align-items: flex-start; gap: 12px;
+    min-height: 220px; padding: 20px 18px; border: 1px solid var(--ink); background: var(--paper); }
+  .svc-table.carousel > .svc-row h3 { font-size: 22px; transform: none !important; }
+  .svc-table.carousel > .svc-row .tags { margin-top: auto; text-align: left; }
+  .svc-table.carousel > .svc-row--accent { background: var(--amber); }
+  .svc-table.carousel > .svc-row--accent .muted, .svc-table.carousel > .svc-row--accent .num, .svc-table.carousel > .svc-row--accent .tags { color: var(--ink-2); }
+  .carousel-dots { display: flex; justify-content: center; gap: 8px; margin-top: 16px; }
+  .carousel-dots i { width: 8px; height: 8px; border-radius: 50%; background: var(--line-soft); transition: background .25s, transform .25s; }
+  .carousel-dots i.on { background: var(--ink); transform: scale(1.25); }
+}
+@media (max-width: 380px) { .brand img { width: 42px; height: 42px; } }
+@media (min-width: 701px) { .carousel-dots { display: none; } }
+/* v hlavičce jen logo – na všech zařízeních */
+.brand > div { display: none; }
+.brand img { width: 50px; height: 50px; }
+@media (max-width: 700px) { .brand img { width: 46px; height: 46px; } }
+@media (max-width: 380px) { .brand img { width: 42px; height: 42px; } }
+
+/* mobilní menu: plynule sjede dolů / vyjede nahoru, položky naběhnou postupně */
+@media (max-width: 1180px) {
+  .nav { display: flex; visibility: hidden; clip-path: inset(0 0 100% 0); pointer-events: none;
+         transition: clip-path .42s cubic-bezier(.7,0,.2,1), visibility 0s linear .42s; }
+  .nav.open { visibility: visible; clip-path: inset(0 0 -40px 0); pointer-events: auto;
+              transition: clip-path .5s cubic-bezier(.7,0,.2,1); }
+  .nav > * { opacity: 0; transform: translateY(-10px); transition: opacity .25s ease, transform .3s ease; }
+  .nav.open > * { opacity: 1; transform: none; transition: opacity .35s ease, transform .45s cubic-bezier(.16,.84,.24,1); }
+  .nav.open > :nth-child(1) { transition-delay: .08s; } .nav.open > :nth-child(2) { transition-delay: .12s; }
+  .nav.open > :nth-child(3) { transition-delay: .16s; } .nav.open > :nth-child(4) { transition-delay: .2s; }
+  .nav.open > :nth-child(5) { transition-delay: .24s; } .nav.open > :nth-child(6) { transition-delay: .28s; }
+  /* seznam služeb v menu se rozbalí plynule */
+  .dd, .has-dd.open .dd { display: grid; grid-template-rows: 0fr; overflow: hidden; visibility: hidden;
+        transition: grid-template-rows .4s cubic-bezier(.7,0,.2,1), visibility 0s linear .4s; }
+  .has-dd.open .dd { grid-template-rows: 1fr; visibility: visible; transition: grid-template-rows .45s cubic-bezier(.7,0,.2,1); }
+  .dd > .dd-row { min-height: 0; padding-top: 0; padding-bottom: 0; border-top-width: 0; transition: padding .4s cubic-bezier(.7,0,.2,1); }
+  .has-dd.open .dd > .dd-row { padding-top: 4px; padding-bottom: 10px; border-top-width: 1px; }
+}
+@media (max-width: 1180px) and (prefers-reduced-motion: reduce) { .nav, .nav > *, .dd { transition: none !important; } }

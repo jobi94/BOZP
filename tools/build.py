@@ -71,8 +71,7 @@ def head(title, desc, current):
 <header class="header">
   <div class="wrap">
     <a class="brand" href="index.html" aria-label="Správa BOZP – úvod">
-      <img src="assets/img/logo.png" alt="" width="40" height="40">
-      <div><b>Správa BOZP</b><span>s.r.o. · Hradec Králové</span></div>
+      <img src="assets/img/logo.png" alt="" width="50" height="50">
     </a>
     <button class="burger" aria-expanded="false" aria-controls="nav" aria-label="Menu"><span></span><span></span><span></span></button>
     <nav class="nav" id="nav" aria-label="Hlavní menu">
@@ -239,10 +238,9 @@ INDEX = f'''
     <div class="hero-top">
       <h1 class="h-xl lines" data-speed="0.12">{HELMET}<span class="ln"><span>Správa</span></span><span class="ln"><span><span class="amber">BOZP</span><span class="sro">s.r.o.</span></span></span></h1>
       <div class="hero-side" data-reveal="fade">
-        <p class="lead">Specialisté na bezpečnost práce a požární ochranu. Převezmeme celou agendu – rizika, dokumentaci, školení i kontroly úřadů – a vy se můžete věnovat svému podnikání.</p>
+        <p class="lead">Specialisté na bezpečnost práce a požární ochranu.<span class="lead-more"> Převezmeme celou agendu – rizika, dokumentaci, školení i kontroly úřadů – a vy se můžete věnovat svému podnikání.</span></p>
         <div class="flex-gap">
           <a class="btn btn--amber" href="kontakt.html">Nezávazná konzultace <span class="arr">→</span></a>
-          <a class="btn btn--ghost" href="sluzby.html">Naše služby</a>
         </div>
       </div>
     </div>
@@ -291,7 +289,7 @@ INDEX = f'''
         <a class="link-arrow" href="sluzby.html">Všechny služby →</a>
       </div>
     </div>
-    <div class="svc-table" data-stagger>
+    <div class="svc-table carousel" data-stagger>
       <a class="svc-row" href="bozp.html"><span class="num">01</span><h3>BOZP</h3><p class="muted">Rizika, kategorizace prací, dokumentace, školení, dohlídky na pracovištích.</p><span class="tags">Outsourcing · OZO</span></a>
       <a class="svc-row" href="pozarni-ochrana.html"><span class="num">02</span><h3>Požární ochrana</h3><p class="muted">Komplexní agenda a dokumentace PO, ve spolupráci se SPBS.</p><span class="tags">Dokumentace · PO</span></a>
       <a class="svc-row" href="zivotni-prostredi-ems.html"><span class="num">03</span><h3>Životní prostředí – EMS</h3><p class="muted">Zavedení a správa EMS, odpady, chemické látky, metodika ČOV.</p><span class="tags">EMS · EMAS · ČOV</span></a>

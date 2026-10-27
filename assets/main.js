@@ -5,12 +5,21 @@ const root = document.documentElement;
 root.classList.remove('no-js');
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const desktop = () => innerWidth > 860;
+// telefony a tablety: méně efektů navázaných na scroll, mapa jen 30 snímků/s
+const lite = matchMedia('(max-width: 860px), (pointer: coarse)').matches;
 const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+
+let scrolling = false, scrollTimer = 0;
+addEventListener('scroll', () => {
+  scrolling = true;
+  clearTimeout(scrollTimer);
+  scrollTimer = setTimeout(() => (scrolling = false), 140);
+}, { passive: true });
 
 // ---------- načtení: rozjetí nadpisů ----------
 const loaded = () => requestAnimationFrame(() => root.classList.add('is-loaded'));
 if (document.fonts && document.fonts.ready) {
-  Promise.race([document.fonts.ready, new Promise((r) => setTimeout(r, 900))]).then(loaded);
+  Promise.race([document.fonts.ready, new Promise((r) => setTimeout(r, 500))]).then(loaded);
 } else loaded();
 
 // ---------- mobilní menu ----------
@@ -134,7 +143,7 @@ document.querySelectorAll('[data-wire]').forEach((cv) => {
 
   const size = () => {
     const r = cv.getBoundingClientRect();
-    const d = Math.min(devicePixelRatio || 1, 2);
+    const d = Math.min(devicePixelRatio || 1, lite ? 1.5 : 2);
     if (Math.abs(r.width - w) < 1 && Math.abs(r.height - h) < 1) return false;
     w = r.width; h = r.height;
     cv.width = w * d; cv.height = h * d;
@@ -176,7 +185,8 @@ document.querySelectorAll('[data-wire]').forEach((cv) => {
       const k = 1 - z * 0.2;
       n.style.transform = `translate3d(${x}px, ${y}px, 0) scale(${k.toFixed(3)})`;
       n.style.opacity = (0.5 + 0.5 * (1 - (z + 1.25) / 2.5)).toFixed(2);
-      n.style.zIndex = z < 0 ? 3 : 2;
+      const zi = z < 0 ? '3' : '2';
+      if (n.style.zIndex !== zi) n.style.zIndex = zi;
     });
   };
 
@@ -217,10 +227,13 @@ document.querySelectorAll('[data-wire]').forEach((cv) => {
   box.addEventListener('pointerup', end);
   box.addEventListener('pointercancel', end);
 
-  let raf = 0;
+  let raf = 0, odd = false, started = false;
   const loop = () => {
     raf = 0;
     if (!visible) return;
+    // na telefonu kreslit jen každý druhý snímek a během scrollování vůbec – scroll pak neseká
+    odd = !odd;
+    if (lite && (odd || scrolling)) { raf = requestAnimationFrame(loop); return; }
     if (!drag) {
       ry += vy; rx = clamp(rx + vx, -1.2, 1.2);
       vx *= 0.94;
@@ -234,10 +247,11 @@ document.querySelectorAll('[data-wire]').forEach((cv) => {
   };
   size(); frame();
   addEventListener('resize', () => { if (size() !== false) frame(); }, { passive: true });
-  new IntersectionObserver(([e]) => {
-    visible = e.isIntersecting;
-    if (visible && !raf && !reduced) raf = requestAnimationFrame(loop);
-  }).observe(cv);
+  const kick = () => { if (started && visible && !raf && !reduced) raf = requestAnimationFrame(loop); };
+  new IntersectionObserver(([e]) => { visible = e.isIntersecting; kick(); }).observe(cv);
+  // otáčení spustit až po načtení stránky, ať nebrzdí úvodní animace
+  const start = () => setTimeout(() => { started = true; kick(); }, 600);
+  document.readyState === 'complete' ? start() : addEventListener('load', start, { once: true });
 });
 
 // ---------- vodorovný scroll: výška sekce podle délky pásu ----------
@@ -282,7 +296,7 @@ function update() {
   boost = Math.min(6, boost + Math.abs(y - lastY) * 0.04);
   lastY = y;
 
-  if (!reduced) {
+  if (!reduced && !lite) {
     speedEls.forEach((el) => {
       if (y < innerHeight * 1.5) el.style.transform = `translate3d(0, ${y * +el.dataset.speed}px, 0)`;
     });
@@ -320,7 +334,7 @@ addEventListener('resize', update, { passive: true });
 update();
 
 // ticker zrychlí při scrollu a pak se uklidní
-if (tickerAnim && !reduced) {
+if (tickerAnim && !reduced && !lite) {
   let calming = false;
   const calm = () => {
     boost *= 0.92;
@@ -343,5 +357,24 @@ document.querySelectorAll('[data-map-load]').forEach((btn) =>
     box.replaceChildren(f);
   })
 );
+
+// ---------- karusel (na telefonu se seznam služeb posouvá do strany) ----------
+document.querySelectorAll('.carousel').forEach((c) => {
+  const items = [...c.children];
+  const dots = document.createElement('div');
+  dots.className = 'carousel-dots';
+  dots.setAttribute('aria-hidden', 'true');
+  items.forEach(() => dots.append(document.createElement('i')));
+  c.after(dots);
+  let raf = 0;
+  const mark = () => {
+    raf = 0;
+    const step = items[1] ? items[1].offsetLeft - items[0].offsetLeft : 1;
+    const i = Math.round(c.scrollLeft / step);
+    [...dots.children].forEach((d, j) => d.classList.toggle('on', j === i));
+  };
+  c.addEventListener('scroll', () => { if (!raf) raf = requestAnimationFrame(mark); }, { passive: true });
+  mark();
+});
 
 document.querySelectorAll('[data-year]').forEach((el) => (el.textContent = new Date().getFullYear()));
